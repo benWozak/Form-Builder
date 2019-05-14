@@ -15,14 +15,18 @@
               </span>
             </template>
             <template slot-scope="{}">
-              <el-button type="text" @click="dialogVisible = true">Options</el-button>
+              <!-- Right aligned side panel -->
+              <div v-click-outside="hide">
+                <SidePanel/>
+              </div>
+              <!-- <el-button type="text" @click="dialogVisible = true">Options</el-button> -->
             </template>
           </el-table-column>
         </el-table>
       </el-main>
     </el-container>
 
-    <el-dialog title="Form Options" :visible.sync="dialogVisible"> 
+    <!-- <el-dialog title="Form Options" :visible.sync="dialogVisible"> 
       <el-form :model="optionItems">
         <el-row :gutter="10">
           <el-col :xs="16" :sm="16" :md="18" :lg="23" :xl="23">
@@ -61,16 +65,22 @@
         <el-button @click="dialogVisible = false">Cancel</el-button>
         <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
       
   </div>
 </template>
 
 <script>
+import SidePanel from '@/components/SidePanel.vue'
+import ClickOutside from 'vue-click-outside'
+
 export default {
   name: 'FormList',
   props: {
     status: Boolean
+  },
+  components: {
+    SidePanel
   },
   data() {
         return {
@@ -93,25 +103,19 @@ export default {
           }],
           search: '',
           scope: '',
-          dialogVisible: false,
           optionItems: {
             dashlet: '',
             quickAccess: '',
-            disable: ''
+            disable: '',
+            opened: false
           }
         }
       },
       methods: {
-      handleClose(done) {
-        this.$confirm('Are you sure to close this dialog?')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
-      },
-      selectOption() {
-
-      }
+         hide() {
+            this.opened = false
+            //document.getElementById("options-menu").style.width = "0";
+        }
     }
 }
 </script>

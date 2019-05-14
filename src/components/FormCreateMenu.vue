@@ -4,13 +4,12 @@
         
         <el-row :gutter="2">
             <el-col :span="4">
-                <draggable :id="key" v-model="inputs" :options="{group: {name:'inputs', pull:'clone', put:'false'}}" 
-                        @start="drag=true" @end="drag=false" :move="chooseInput">
-                    <transition-group>
-                        <div v-for="input in inputs" :key="input.id">
+                <draggable v-model="inputList" :options="{group: {name:'inputs', pull:'clone', put:'false'}}" >
+                    <!-- <transition-group> -->
+                        <div v-for="input in inputList" :key="input.id">
                             <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover" >{{ input.name }}</el-card>
                         </div>
-                    </transition-group>
+                    <!-- </transition-group> -->
             </draggable>
             </el-col>
         </el-row>    
@@ -44,9 +43,16 @@ export default {
     components: {
         draggable
     },
-    computed: mapState({
-
-    }),
+    computed: {
+        inputList: {
+            get(){
+               return this.inputs
+            },
+            set(value) {
+                this.inputs = value
+            }
+        }
+    },
     methods: {
         chooseInput: function (e) {
             console.log('chooseInput' + e.from.id);

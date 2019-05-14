@@ -3,25 +3,15 @@
         <el-container>
             <el-header><h1>Canvas</h1></el-header>
             <el-main>
-                <el-row :gutter="2" v-for="selectedInput in selections" :key="selectedInput">
-                    <el-col :span="24">
-                        <dragable :id="key" v-model="inputs" :options="{group:'inputs'}"
-                            @start="drag=true" @end="drag=false" @add="newInput">
-                            <transition-group>
-                                <el-row :gutter="10">
-                                    <el-col class="float-left" :span="24">
-                                        <div class="grid-content bg-purple-dark">
-                                            <el-card body-style="padding: 10px;" shadow="hover" >
-                                                <!-- {{ input[0].name }} -->
-                                            </el-card>
-                                        </div>
-                                    </el-col>
-                                </el-row>
-                                
-                            </transition-group>
-                        </dragable>
-                    </el-col>
-                </el-row>
+                <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
+                    <div v-for="input in formList" :key="input.id">
+                        <el-row type="flex" :gutter="24">
+                            <el-col class="float-left" :span="12">
+                                <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover" >{{ input.name }}</el-card>
+                            </el-col>
+                        </el-row>
+                    </div>
+                </draggable>
             </el-main>
         </el-container>
 
@@ -54,8 +44,10 @@ export default {
     data: () => {
         return {
             selections: [],
-            inputs: [
-                {id: '', name: ''}
+            form: [
+                {id: '10', name: 'custom input'},
+                {id: '11', name: 'custom input2'},
+                {id: '12', name: 'custom input3'},
             ]
         }
     },
@@ -63,12 +55,12 @@ export default {
             draggable
         },
     computed: {
-        newInput: {
+        formList: {
             get() {
-                return this.$store.state.inputs
+                return this.form
             },
             set(value) {
-                this.$store.commit('newInput', value)
+                this.form = value
             }
         }
     },
@@ -86,8 +78,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.dropArea {
+    width: 100%;
+    border: 1px solid black;
+}
 .el-row {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     margin-left: 5px;
     margin-right: 5px;
     /* -webkit-margin-top-collapse: inherit; */
