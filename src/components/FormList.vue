@@ -1,5 +1,5 @@
 <template>
-  <div class="FormList">
+  <div id="FormList">
     <h1>Forms</h1>
 
     <el-container class="form-list">
@@ -19,7 +19,6 @@
               <div v-click-outside="hide">
                 <SidePanel/>
               </div>
-              <!-- <el-button type="text" @click="dialogVisible = true">Options</el-button> -->
             </template>
           </el-table-column>
         </el-table>
@@ -122,6 +121,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #FormList {
+    /* font-size: 20px; */
+  }
   .form-list {
     height: 500px;
     border: 1px solid #eee;

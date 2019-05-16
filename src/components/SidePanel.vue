@@ -2,7 +2,7 @@
     <div id="menu">
         <el-button type="text" @click="toggle">&#9776; OPTIONS</el-button>
 
-        <div v-click-outside="hide" v-show="opened" id="options-menu" class="options" v-bind:style="{ width: divWidth + 'px' }">
+        <div v-click-outside="hide" v-show="opened" class="options" v-bind:style="{ width: divWidth + 'px' }">
             <a href="javascript:void(0)" class="close" @click="hide">&times;</a>
             <a href="#">Lets figure out</a>
             <a href="#">how to make this</a>
@@ -49,6 +49,12 @@ export default {
 </script>
 
 <style>
+    .enter-active, .leave-active {
+        transition: .5s;
+    }
+    .enter, .leave-to {
+        opacity: 0;
+    }
     .options {
         height: 100%;
         width: 0;

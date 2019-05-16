@@ -6,13 +6,14 @@ import draggable from 'vuedraggable'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Button, Select } from 'element-ui';
+import locale from 'element-ui/lib/locale/lang/en'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI);
-Vue.component(Button.name, Button);
-Vue.component(Select.name, Select);
 Vue.use(draggable);
 Vue.use(Vuex);
+Vue.use(ElementUI,{ locale });
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
 
 
 new Vue({
