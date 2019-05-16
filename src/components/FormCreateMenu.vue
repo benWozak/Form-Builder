@@ -1,6 +1,7 @@
 <template>
-    <div id="menu">
-        <h1>Input Fields Menu</h1>
+    <div id="menu" v-sticky="{ zIndex: 0, stickyTop: 0, disabled: false}">
+        <div>
+            <h1>Input Fields Menu</h1>
         
         <el-row :gutter="2">
             <el-col :span="4">
@@ -10,13 +11,14 @@
                         </div>
             </draggable>
             </el-col>
-        </el-row>    
-        
+        </el-row>  
+        </div>
     </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable'
+import VueSticky from 'vue-sticky' 
 
 export default {
     data: () => {
@@ -37,6 +39,9 @@ export default {
     },
     components: {
         draggable
+    },
+    directives: {
+        'sticky': VueSticky,
     },
     computed: {
         inputList: {

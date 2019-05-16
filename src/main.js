@@ -7,9 +7,12 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Button, Select } from 'element-ui';
 import locale from 'element-ui/lib/locale/lang/en'
+import VueSticky from 'vue-sticky' 
+
 
 Vue.config.productionTip = false
 Vue.use(draggable);
+Vue.use(VueSticky);
 Vue.use(Vuex);
 Vue.use(ElementUI,{ locale });
 Vue.component(Button.name, Button);

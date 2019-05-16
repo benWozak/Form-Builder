@@ -40,48 +40,54 @@
                                     
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
                                         {{ input.name }}
-                                        <div v-if="input.id === 0">
+                                        
+                                        <div v-if="input.id === 0"> <!-- textbox -->
                                             <span class="inputLabel"></span><br>
                                             <el-input type="text" placeholder="Textbox" v-model="customfield"></el-input>
                                         </div>
-                                        <div v-else-if="input.id === 1">
+                                        <div v-else-if="input.id === 1"> <!-- textArea -->
                                             <span class="inputLabel"></span><br>
                                             <el-input type="textarea" :rows="2" placeholder="Your text here" v-model="customArea"></el-input>
                                         </div>
-                                        <div v-else-if="input.id === 2">
+                                        <div v-else-if="input.id === 2"> <!-- email -->
                                             <span class="inputLabel"></span><br>
                                             <el-input type="email" placeholder="example@email.com" v-model="emailfield"></el-input>
                                         </div>
-                                        <div v-else-if="input.id === 3">
+                                        <div v-else-if="input.id === 3"> <!-- address -->
                                             <span class="inputLabel"></span><br>
                                             <el-input type="text" placeholder="123 address" v-model="addressfields"></el-input>
                                         </div>
-                                        <div v-else-if="input.id === 4">
+                                        <div v-else-if="input.id === 4"> <!-- phone number -->
                                             <span class="inputLabel"></span><br>
                                             <el-input type="number" placeholder="123 456 7890" v-model="phonefield"></el-input>
                                         </div>
-                                        <div v-else-if="input.id === 5">
+                                        <div v-else-if="input.id === 5"> <!-- numeric -->
                                             <span class="inputLabel"></span><br>
                                             <el-input-number placeholder="" v-model="numfield"></el-input-number>
                                         </div>
-                                        <div v-else-if="input.id === 6">
+                                        <div v-else-if="input.id === 6"> <!-- dropdown -->
                                             <span class="inputLabel"></span><br>
                                             <el-select placeholder="select" v-model="dropdown"></el-select>
                                         </div>
-                                        <div v-else-if="input.id === 7">
+                                        <div v-else-if="input.id === 7"> <!-- radio -->
                                             <span class="inputLabel"></span><br>
-                                            <el-radio v-model="radio" label="1">{{ option }}</el-radio>
-                                            <el-radio v-model="radio" label="2">{{ option }}</el-radio>
+                                            <el-radio-group v-for="radio in radios" :key="radio.text">
+                                                <el-radio v-model="radio.text" label="1">{{ radio.text }}</el-radio>
+                                                <el-radio v-model="radio.text" label="1">{{ radio.text }}</el-radio>
+                                            </el-radio-group>
+                                            <el-button type="primary" icon="el-icon-plus">add</el-button>
                                         </div>
-                                        <div v-else-if="input.id === 8">
+                                        <div v-else-if="input.id === 8"> <!-- checkbox list -->
                                             <span class="inputLabel"></span><br>
                                             <el-checkbox-group v-model="checkList">
-                                                <el-checkbox label="Option A"></el-checkbox>
-                                                <el-checkbox label="Option B"></el-checkbox>
-                                                <el-checkbox label="Option C"></el-checkbox>
+                                                <el-checkbox label="1">{{ option }}</el-checkbox>
+                                                <el-checkbox label="2">{{ option }}</el-checkbox>
+                                                <el-checkbox label="3">{{ option }}</el-checkbox>
+                                                <el-button type="primary" icon="el-icon-plus">add</el-button>
                                             </el-checkbox-group>
+                                            
                                         </div>
-                                        <div v-else-if="input.id === 9">
+                                        <div v-else-if="input.id === 9"> <!-- section divider -->
                                             <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                                                 <draggable class="dropArea" v-model="sectionList" :options='{group: "inputs"}'>
                                                     <div v-for="input in sectionList" :key="input.id">
@@ -159,6 +165,7 @@ export default {
                 { value: 'Counselling', label: 'Counselling'},
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
+            input: '',
             customfield: '',
             customArea: '',
             phonefield: '',
@@ -166,9 +173,12 @@ export default {
             addressfields: '',
             numfield: '',
             dropdown: '',
-            radio: '',
+            radios: [
+                {index: 1, text: "New Option"}
+            ],
             checkbox: '',
             sectionHeader: 'New Section',
+            option:  'New Option',
             form: [
                 // {section: []}
             ],
