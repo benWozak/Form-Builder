@@ -37,7 +37,7 @@
                                 <el-popover placement="top-end" width="250" trigger="hover" content="">
                                     <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
                                     <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button>
-                                    
+                                            
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
                                         {{ input.name }}
                                         
@@ -59,20 +59,20 @@
                                         <div v-else-if="input.id === 5"> <!-- Checkbox -->
                                             <CheckboxField/>
                                         </div>
-                                        <div v-else-if="input.id === 6"> <!-- Email -->
-                                            <EmailField/>
+                                        <div v-else-if="input.id === 6"> <!-- Matrix Field -->
+                                            <MatrixField/>
                                         </div>
-                                        <div v-else-if="input.id === 7"> <!-- Address -->
-                                            <AddressField/>
-                                        </div>
-                                        <div v-else-if="input.id === 8"> <!-- Phone Number -->
-                                            <PhoneField/>
-                                        </div>
-                                        <div v-else-if="input.id === 9"> <!-- Date Field -->
+                                        <div v-else-if="input.id === 7"> <!-- Date Field -->
                                             <DateField/>
                                         </div>
-                                        <div v-else-if="input.id === 10"> <!-- Matrix Field -->
-                                            <MatrixField/>
+                                        <div v-else-if="input.id === 8"> <!-- Email -->
+                                            <EmailField/>
+                                        </div>
+                                        <div v-else-if="input.id === 9"> <!-- Address -->
+                                            <AddressField/>
+                                        </div>
+                                        <div v-else-if="input.id === 10"> <!-- Phone Number -->
+                                            <PhoneField/>
                                         </div>
 
                             <!-- Do something else with this -->
@@ -184,21 +184,24 @@ export default {
             //section: []
         }
     },
+    props: {
+        value: '' //placeholder
+    },
     components: {
-            draggable,
-            SidePanel,
-            TextBox,
-            TextArea,
-            EmailField,
-            NumericField,
-            AddressField,
-            CheckboxField,
-            DropdownField,
-            PhoneField,
-            RadioField,
-            DateField,
-            MatrixField,
-        },
+        draggable,
+        SidePanel,
+        TextBox,
+        TextArea,
+        EmailField,
+        NumericField,
+        AddressField,
+        CheckboxField,
+        DropdownField,
+        PhoneField,
+        RadioField,
+        DateField,
+        MatrixField,
+    },
     computed: {
         formList: {
             get() {
