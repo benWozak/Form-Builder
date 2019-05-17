@@ -42,52 +42,41 @@
                                         {{ input.name }}
                                         
                                         <div v-if="input.id === 0"> <!-- textbox -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input type="text" placeholder="Textbox" v-model="customfield"></el-input>
+                                            <TextBox/>
                                         </div>
                                         <div v-else-if="input.id === 1"> <!-- textArea -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input type="textarea" :rows="2" placeholder="Your text here" v-model="customArea"></el-input>
+                                            <TextArea/>
                                         </div>
-                                        <div v-else-if="input.id === 2"> <!-- email -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input type="email" placeholder="example@email.com" v-model="emailfield"></el-input>
+                                        <div v-else-if="input.id === 2"> <!-- Numeric field -->
+                                            <NumericField/>
                                         </div>
-                                        <div v-else-if="input.id === 3"> <!-- address -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input type="text" placeholder="123 address" v-model="addressfields"></el-input>
+                                        <div v-else-if="input.id === 3"> <!-- Dropdown -->
+                                            <DropdownField/>
                                         </div>
-                                        <div v-else-if="input.id === 4"> <!-- phone number -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input type="number" placeholder="123 456 7890" v-model="phonefield"></el-input>
+                                        <div v-else-if="input.id === 4"> <!-- Radio -->
+                                            <RadioField/>
                                         </div>
-                                        <div v-else-if="input.id === 5"> <!-- numeric -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-input-number placeholder="" v-model="numfield"></el-input-number>
+                                        <div v-else-if="input.id === 5"> <!-- Checkbox -->
+                                            <CheckboxField/>
                                         </div>
-                                        <div v-else-if="input.id === 6"> <!-- dropdown -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-select placeholder="select" v-model="dropdown"></el-select>
+                                        <div v-else-if="input.id === 6"> <!-- Email -->
+                                            <EmailField/>
                                         </div>
-                                        <div v-else-if="input.id === 7"> <!-- radio -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-radio-group v-for="radio in radios" :key="radio.text">
-                                                <el-radio v-model="radio.text" label="1">{{ radio.text }}</el-radio>
-                                                <el-radio v-model="radio.text" label="1">{{ radio.text }}</el-radio>
-                                            </el-radio-group>
-                                            <el-button type="primary" icon="el-icon-plus">add</el-button>
+                                        <div v-else-if="input.id === 7"> <!-- Address -->
+                                            <AddressField/>
                                         </div>
-                                        <div v-else-if="input.id === 8"> <!-- checkbox list -->
-                                            <span class="inputLabel"></span><br>
-                                            <el-checkbox-group v-model="checkList">
-                                                <el-checkbox label="1">{{ option }}</el-checkbox>
-                                                <el-checkbox label="2">{{ option }}</el-checkbox>
-                                                <el-checkbox label="3">{{ option }}</el-checkbox>
-                                                <el-button type="primary" icon="el-icon-plus">add</el-button>
-                                            </el-checkbox-group>
-                                            
+                                        <div v-else-if="input.id === 8"> <!-- Phone Number -->
+                                            <PhoneField/>
                                         </div>
-                                        <div v-else-if="input.id === 9"> <!-- section divider -->
+                                        <div v-else-if="input.id === 9"> <!-- Date Field -->
+                                            <DateField/>
+                                        </div>
+                                        <div v-else-if="input.id === 10"> <!-- Matrix Field -->
+                                            <MatrixField/>
+                                        </div>
+
+                            <!-- Do something else with this -->
+                                        <div v-else-if="input.id === 11"> <!-- section divider -->
                                             <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                                                 <draggable class="dropArea" v-model="sectionList" :options='{group: "inputs"}'>
                                                     <div v-for="input in sectionList" :key="input.id">
@@ -103,7 +92,6 @@
                 </draggable>
             </el-main>
         </el-container>
-
 
         <!-- <el-row :gutter="10">
             <el-col class="float-left" :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
@@ -130,6 +118,17 @@
 import draggable from 'vuedraggable'
 import SidePanel from '@/components/SidePanel.vue'
 import ClickOutside from 'vue-click-outside'
+import TextBox from '@/components/menu/TextBox.vue'
+import TextArea from '@/components/menu/TextArea.vue'
+import EmailField from '@/components/menu/EmailField.vue'
+import AddressField from '@/components/menu/AddressField.vue'
+import CheckboxField from '@/components/menu/CheckboxField.vue'
+import DropdownField from '@/components/menu/DropdownField.vue'
+import NumericField from '@/components/menu/NumericField.vue'
+import PhoneField from '@/components/menu/PhoneField.vue'
+import RadioField from '@/components/menu/RadioField.vue'
+import DateField from '@/components/menu/DateField.vue'
+import MatrixField from '@/components/menu/MatrixField.vue'
 
 export default {
     data: () => {
@@ -187,7 +186,18 @@ export default {
     },
     components: {
             draggable,
-            SidePanel
+            SidePanel,
+            TextBox,
+            TextArea,
+            EmailField,
+            NumericField,
+            AddressField,
+            CheckboxField,
+            DropdownField,
+            PhoneField,
+            RadioField,
+            DateField,
+            MatrixField,
         },
     computed: {
         formList: {

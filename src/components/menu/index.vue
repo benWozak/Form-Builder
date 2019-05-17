@@ -1,0 +1,135 @@
+<template>
+    <div id="menu">
+        <div class="menu-container">
+            <!-- <h1>Input Fields Menu</h1> -->
+        
+            <el-row type="flex" :gutter="4">
+                <el-col :span="4">
+                    <!-- <draggable v-model="inputList" :options="{group: {name:'inputs', pull:'clone', put:'false'}}" > -->
+                    <el-collapse v-model="activeNames" @change="handleChange" accordion>
+                        <el-collapse-item title="1 - Select a Field" name="1">
+                            <h1>Basic Inputs</h1>
+                            <div v-for="input in basicInputs" :key="input.id">
+                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover" @click="selectInput">
+                                    {{ input.name }}
+                                </el-card>
+                            </div>
+                        <el-divider></el-divider>
+                            <h1>Preset Inputs</h1>
+                            <div v-for="input in presetInputs" :key="input.id">
+                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover" @click="selectInput">
+                                    {{ input.name }}
+                                </el-card>
+                            </div>
+                        <el-divider></el-divider>
+                            <h1>Advanced Inputs</h1>
+                            <div v-for="input in advancedInputs" :key="input.id">
+                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover" @click="selectInput">
+                                    {{ input.name }}
+                                </el-card>
+                            </div>
+                        </el-collapse-item>
+                        <el-collapse-item title="2 - Set Field Requirements" name="2">
+                            <div><strong>Add Content</strong></div>
+                            <div><strong>Add Content</strong></div>
+                            <div><strong>Add Content</strong></div>
+                            <div><strong>Add Content</strong></div>
+                            <div><strong>Add Content</strong></div>
+                            <div><strong>Add Content</strong></div>
+                            <el-button type="success" icon="el-icon-plus" class="flex-wrap" @click="setInputOptions">Set</el-button>
+                        </el-collapse-item>
+                        <el-collapse-item title="3 - Add Field" name="3">
+                            <el-button type="success" icon="el-icon-plus" class="flex-wrap" @click="addInput">Add</el-button>
+                        </el-collapse-item>
+                    </el-collapse>
+
+                        <!-- <div v-for="input in inputList" :key="input.id">
+                            <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">{{ input.name }}</el-card>
+                        </div> -->
+                    <!-- </draggable> -->
+                </el-col>
+            </el-row>
+        </div>
+              
+    </div>
+</template>
+
+<script>
+import draggable from 'vuedraggable' 
+
+export default {
+    data: () => {
+        return {
+            activeNames: ['1'],
+            basicInputs: [
+                {id: 0, name: 'Text Box', component: 'TexBox'},
+                {id: 1, name: 'Text Area', component: 'TexArea'},
+                {id: 2, name: 'Numeric', component: 'NumericField'},
+                {id: 3, name: 'Dropdown', component: 'DropdownField'},
+                {id: 4, name: 'Radio', component: 'RadioField'},
+                {id: 5, name: 'Checkbox', component: 'CheckboxField'},
+            ],
+            presetInputs: [
+                {id: 6, name: 'Email', component: 'EmailField'},
+                {id: 7, name: 'Address', component: 'AddressField'},
+                {id: 8, name: 'Phone Number', component: 'PhoneField'},
+            ],
+            advancedInputs: [
+                {id: 9, name: 'Date Field', component: 'DateField'},
+                {id: 10, name: 'Matrix', component: 'MatrixField'},
+            ],
+            others: [
+                {id: 11, name: 'Section Divider', icon: ''},
+            ],
+        }
+    },
+    components: {
+        draggable
+    },
+    computed: {
+        inputList: {
+            get(){
+               return this.inputs
+            },
+            set(value) {
+                this.inputs = value
+            }
+        }
+    },
+    methods: {
+        handleChange(val) {
+            console.log(val);
+        },
+        selectInput() {
+
+        },
+        setInputOptions(){
+
+        },
+        addInput() {
+
+        }
+    }
+}
+</script>
+
+<style>
+    #menu {
+        font-size: 28px;
+    }
+    .menu-container .el-row .el-col .el-collapse {
+        /* margin-left: 5px;
+        padding-left: 5px; */
+        max-width: 270px;
+    }
+    .menu-container .el-row {
+        margin-left: 5px;
+        padding-left: 5px;
+    }
+    .el-card {
+        margin: 5px;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+</style>

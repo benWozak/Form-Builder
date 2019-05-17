@@ -3,7 +3,7 @@
     <h1>Form Builder</h1>
       <el-container>
         <el-aside>
-          <FormCreateMenu/>
+          <FormMenu/>
         </el-aside>
   
           <el-container>
@@ -20,7 +20,7 @@
             </el-header>
     
           <el-main>
-            <FormCreateCanvas/>
+            <FormCanvas/>
           </el-main>
         </el-container>
       </el-container>
@@ -30,37 +30,39 @@
 
 <script>
 import draggable from 'vuedraggable';
-import FormCreateCanvas from '@/components/FormCreateCanvas.vue'
-import FormCreateMenu from '@/components/FormCreateMenu.vue'
+import FormCanvas from '@/components/FormCanvas.vue'
+import FormMenu from '@/components/menu/index.vue'
 
 export default {
   name: 'Form',
   components: {
-    FormCreateCanvas,
-    FormCreateMenu,
+    FormCanvas,
+    FormMenu,
     draggable
   }
 }
 </script>
 
 <style scoped>
-.el-container {
-  height: 100%; 
-  flex-shrink: inherit;
-  border: 1px solid #eee;
-}
-.el-header {
+  .el-container {
+    height: 100%; 
+    flex-shrink: inherit;
+    border: 1px solid #eee;
+  }
+  .el-header {
     background-color: #B3C0D1;
     color: #333;
-    line-height: 60px;
+    line-height: 50px;
   }
-  
   .el-aside {
     color: #333;
     background-color: rgb(238, 241, 246);
     flex: 1 100px;
-    min-width: 150px;
+    min-width: 180px;
     max-width: 300px;
+    max-height: 800px;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 </style>
 
