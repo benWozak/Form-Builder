@@ -30,9 +30,11 @@
                     <el-divider></el-divider>
                 </el-card>
 
-                <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
-                    <div v-for="input in formList" :key="input.id">
-                        <el-row type="flex" :gutter="2">
+            <el-card body-style="padding: 10px;" shadow="hover">
+                <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
+                    <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
+                        <div v-for="(inputType, index) in formList" :item="inputType" :key="index">
+                            <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
                                 <el-popover placement="top-end" width="250" trigger="hover" content="">
                                     <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
@@ -40,6 +42,8 @@
                                             
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
                                         {{ input.name }}
+                                        
+                                        <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="input.id === 0"> <!-- textbox -->
                                             <TextBox/>
@@ -74,22 +78,27 @@
                                         <div v-else-if="input.id === 10"> <!-- Phone Number -->
                                             <PhoneField/>
                                         </div>
+                                        <div v-if="form.length == 0"> <!-- No Selection -->
+                                            <p>New fields will be placed here</p>
+                                        </div>
 
-                            <!-- Do something else with this -->
-                                        <div v-else-if="input.id === 11"> <!-- section divider -->
+                            <!-- Do something else with this: section Divider -->
+                                        <!-- <div v-else-if="input.id === 11"> 
                                             <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                                                 <draggable class="dropArea" v-model="sectionList" :options='{group: "inputs"}'>
                                                     <div v-for="input in sectionList" :key="input.id">
                                                     </div>
                                                 </draggable>
                                             <el-divider></el-divider>
-                                        </div>
+                                        </div> -->
                                     </el-card>
                                 </el-popover>
                             </el-col>
                         </el-row>
                     </div>
                 </draggable>
+                <el-divider></el-divider>
+            </el-card>
             </el-main>
         </el-container>
 
@@ -118,6 +127,7 @@
 import draggable from 'vuedraggable'
 import SidePanel from '@/components/SidePanel.vue'
 import ClickOutside from 'vue-click-outside'
+
 import TextBox from '@/components/menu/TextBox.vue'
 import TextArea from '@/components/menu/TextArea.vue'
 import EmailField from '@/components/menu/EmailField.vue'
@@ -164,20 +174,9 @@ export default {
                 { value: 'Counselling', label: 'Counselling'},
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
-            input: '',
-            customfield: '',
-            customArea: '',
-            phonefield: '',
-            emailfield: '',
-            addressfields: '',
-            numfield: '',
-            dropdown: '',
-            radios: [
-                {index: 1, text: "New Option"}
-            ],
-            checkbox: '',
             sectionHeader: 'New Section',
-            option:  'New Option',
+            input: '',
+            inputType: '',
             form: [
                 // {section: []}
             ],
@@ -185,7 +184,7 @@ export default {
         }
     },
     props: {
-        value: '' //placeholder
+        value: {} //placeholder
     },
     components: {
         draggable,
@@ -235,6 +234,10 @@ export default {
 </script>
 
 <style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #canvas {
   /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
   font-family: sans-serif;

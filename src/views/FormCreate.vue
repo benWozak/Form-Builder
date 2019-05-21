@@ -3,7 +3,7 @@
     <h1>Form Builder</h1>
       <el-container>
         <el-aside>
-          <FormMenu/>
+          <FormMenu @inputData="updateCanvas"/>
         </el-aside>
   
           <el-container>
@@ -39,6 +39,16 @@ export default {
     FormCanvas,
     FormMenu,
     draggable
+  },
+  data: () => {
+    return {
+      canvasInput: {}
+    }
+  },
+  methods: {
+    updateCanvas(newInput) {
+      this.canvasInput = newInput;
+    }
   }
 }
 </script>
@@ -57,10 +67,11 @@ export default {
   .el-aside {
     color: #333;
     background-color: rgb(238, 241, 246);
-    flex: 1 100px;
+    flex-shrink: inherit;
     min-width: 180px;
-    max-width: 300px;
+    max-width: 320px;
     max-height: 800px;
+    padding-right: 5px;
     overflow-y: auto;
     overflow-x: hidden;
   }

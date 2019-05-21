@@ -16,24 +16,19 @@
                             </div>
                         <!-- <el-divider></el-divider> -->
                             <h1>Preset Inputs</h1>
-                           <div v-for="input in presetInputs" :key="input.id">
-                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover" @click="selectInput">
+                           <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
+                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover">
                                     {{ input.name }}
                                 </el-card>
                             </div>
                         <!-- <el-divider></el-divider> -->
                         </el-collapse-item>
                         <el-collapse-item title="2 - Set Field Requirements" name="2">
-                            <div><strong>Add Content</strong></div>
-                            <div><strong>Add Content</strong></div>
-                            <div><strong>Add Content</strong></div>
-                            <div><strong>Add Content</strong></div>
-                            <div><strong>Add Content</strong></div>
-                            <div><strong>Add Content</strong></div>
-                            <el-button type="success" class="flex-wrap" @click="setInputOptions">Set</el-button>
+                            <InputOptions :inputData="selectedInput"/>
+                            <!-- <el-button type="success" @click="setInputOptions">Set</el-button> -->
                         </el-collapse-item>
                         <el-collapse-item title="3 - Add Field" name="3">
-                            <el-button type="success" icon="el-icon-plus" class="flex-wrap" @click="addInput">Add</el-button>
+                            <el-button type="success" icon="el-icon-plus" @click="addInput">Add</el-button>
                         </el-collapse-item>
                     </el-collapse>
 
@@ -49,13 +44,15 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable' 
+import draggable from 'vuedraggable'
+import InputOptions from '@/components/menu/InputOptions.vue' 
 
 export default {
     data: () => {
         return {
             step: '1',
-            selectedInput: '',
+            selectedInput: {id: '', name: '', component: ''},
+            // selectedInput: '',
             basicInputs: [
                 {id: 0, name: 'Text Box', component: 'TexBox'},
                 {id: 1, name: 'Text Area', component: 'TexArea'},
@@ -74,13 +71,14 @@ export default {
             others: [
                 {id: 11, name: 'Section Divider', icon: ''},
             ],
+            options: {} //passed from InputOptions component
         }
     },
     props: {
-        
     },
     components: {
-        draggable
+        draggable,
+        InputOptions
     },
     computed: {
         
@@ -90,15 +88,19 @@ export default {
             console.log(val);
         },
         selectInput(input) {
-            return input = this.selectedInput;
-            alert(selectedInput);
-            // alert(input.id);
-        },
-        setInputOptions(){
+            console.log(input.name);
+            this.selectedInput = Object.assign({}, input);
+            console.log(this.selectedInput.id);
 
+            this.step = '2';
+        },
+        setInputOptions(value){
+            this.options = value;
+            this.step = '3';
         },
         addInput() {
-
+            //submit
+            this.$emit("inputData", this.input);
         }
     }
 }
@@ -111,7 +113,9 @@ export default {
     .menu-container .el-row .el-col .el-collapse {
         /* margin-left: 5px;
         padding-left: 5px; */
-        max-width: 270px;
+        max-width: 300px;
+        min-width: 150px;
+        padding-right: 5px;
     }
     .menu-container .el-row {
         margin-left: 5px;
