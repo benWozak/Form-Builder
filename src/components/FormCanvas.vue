@@ -21,7 +21,7 @@
                             
                     <el-card body-style="padding: 10px;" shadow="hover">
                         <span class="inputLabel">Department</span><br>
-                        <el-select v-model="value" placeholder="Select">
+                        <el-select value="" placeholder="Select">
                             <el-option v-for="department in departments" :key="department.value"
                             :label="department.label" :value="department.value">
                             </el-option>
@@ -34,7 +34,7 @@
             <el-card body-style="padding: 10px;" shadow="hover">
                 <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                     <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
-                        <div v-for="(inputType, index) in formList" :item="inputType" :key="index">
+                        <div v-for="(inputType, index) in fields" :item="inputType" :key="index">
                             <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
                                 <el-popover placement="top-end" width="250" trigger="hover" content="">
@@ -42,41 +42,42 @@
                                     <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button>
                                             
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
-                                        {{ input.name }}
+                                        {{ inputType.input.name }}
                                         
                                         <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
-                                        <div v-if="input.id === 0"> <!-- textbox -->
+                                        <div v-if="inputType.input.id === 0"> <!-- textbox -->
+                                            asdasdsa
                                             <TextBox/>
                                         </div>
-                                        <div v-else-if="input.id === 1"> <!-- textArea -->
+                                        <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                             <TextArea/>
                                         </div>
-                                        <div v-else-if="input.id === 2"> <!-- Numeric field -->
+                                        <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                             <NumericField/>
                                         </div>
-                                        <div v-else-if="input.id === 3"> <!-- Dropdown -->
+                                        <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
                                             <DropdownField/>
                                         </div>
-                                        <div v-else-if="input.id === 4"> <!-- Radio -->
+                                        <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
                                             <RadioField/>
                                         </div>
-                                        <div v-else-if="input.id === 5"> <!-- Checkbox -->
+                                        <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
                                             <CheckboxField/>
                                         </div>
-                                        <div v-else-if="input.id === 6"> <!-- Matrix Field -->
+                                        <div v-else-if="inputType.input.id === 6"> <!-- Matrix Field -->
                                             <MatrixField/>
                                         </div>
-                                        <div v-else-if="input.id === 7"> <!-- Date Field -->
+                                        <div v-else-if="inputType.input.id === 7"> <!-- Date Field -->
                                             <DateField/>
                                         </div>
-                                        <div v-else-if="input.id === 8"> <!-- Email -->
+                                        <div v-else-if="inputType.input.id === 8"> <!-- Email -->
                                             <EmailField/>
                                         </div>
-                                        <div v-else-if="input.id === 9"> <!-- Address -->
+                                        <div v-else-if="inputType.input.id === 9"> <!-- Address -->
                                             <AddressField/>
                                         </div>
-                                        <div v-else-if="input.id === 10"> <!-- Phone Number -->
+                                        <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
                                             <PhoneField/>
                                         </div>
                                         <!-- <div v-if="form.length == 0">
@@ -185,7 +186,11 @@ export default {
     },
     props: {
         // value: {}, //placeholder
-        newInput: Function
+        newInput: Function,
+        fields: {
+            type: Array,
+            default: []
+        }
     },
     components: {
         draggable,
@@ -234,6 +239,10 @@ export default {
     watch: {
         newInput() {
             this.form.push(this.input.id)
+        },
+
+        fields() {
+            console.log(this.fields);
         }
     }
 }

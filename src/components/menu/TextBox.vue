@@ -4,7 +4,7 @@
             <el-collapse-item name="1">
                 <template slot="title">
                     <span class="inputLabel"></span><br>
-                    <el-input type="text" placeholder="Textbox" v-model="customfield" disabled></el-input>
+                    <el-input type="text" placeholder="Textbox" disabled></el-input>
                 </template>
                     <el-form ref="form" :model="form" label-width="120px">
                         <el-form-item label="Activity name">
