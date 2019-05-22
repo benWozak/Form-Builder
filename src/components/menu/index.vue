@@ -24,7 +24,7 @@
                         <!-- <el-divider></el-divider> -->
                         </el-collapse-item>
                         <el-collapse-item title="2 - Set Field Requirements" name="2">
-                            <InputOptions :inputData="selectedInput" :outputData="setInputOptions"/>
+                            <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
                             <!-- <el-button type="success" @click="setInputOptions">Set</el-button> -->
                         </el-collapse-item>
                         <el-collapse-item title="3 - Add Field" name="3">
@@ -95,8 +95,9 @@ export default {
 
             this.step = '2';
         },
-        setInputOptions() {
-            // this.options = value;
+        setInputOptions(value) {
+            this.options = value;
+
             this.step = '3';
         },
         addInput() {
