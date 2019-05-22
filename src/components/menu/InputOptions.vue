@@ -39,7 +39,7 @@
     </el-form>
    </div>
 
-   <!-- 
+   <!--------TextArea---------->
    <div v-if="inputData.id === 1">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -58,7 +58,7 @@
     </el-form>
    </div>
 
- 
+  <!---------Numeric--------->
    <div v-if="inputData.id === 2">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -74,6 +74,7 @@
     </el-form>
    </div>
 
+   <!--------Dropdown---------->
    <div v-if="inputData.id === 3">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -98,6 +99,7 @@
     </el-form>
    </div>
 
+   <!--------Radio---------->
    <div v-if="inputData.id === 4">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -113,6 +115,7 @@
     </el-form>
    </div>
 
+   <!--------Checkbox---------->
    <div v-if="inputData.id === 5">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -128,6 +131,7 @@
     </el-form>
    </div>
 
+   <!--------Date Field---------->
    <div v-if="inputData.id === 6">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -143,6 +147,7 @@
     </el-form>
    </div>
   
+  <!--------Matrix---------->
   <div v-if="inputData.id === 7">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -158,6 +163,7 @@
     </el-form>
    </div>
 
+   <!--------Email---------->
    <div v-if="inputData.id === 8">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -173,6 +179,7 @@
     </el-form>
    </div>
 
+   <!--------Address---------->
    <div v-if="inputData.id === 9">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -188,6 +195,7 @@
     </el-form>
    </div>
 
+   <!--------Phone Number---------->
    <div v-if="inputData.id === 10">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -201,7 +209,7 @@
         <el-button type="success" @click="submitOptions">Set</el-button>
       </el-form-item>
     </el-form>
-   </div>-->
+   </div>
  
 
  </div>
@@ -229,8 +237,6 @@ export default {
  },
  props: {
    inputData: Object,
-   // outputData: Object,
-   // step: String
  },
  methods: {
   removeDomain(item) {
@@ -246,8 +252,6 @@ export default {
     });
   },
   submitOptions(options) {
-    // this.options = this.outputData;
-    // this.outputData = Object.assign({}, options);
     this.$emit('outputData', this.options);
   }
  }

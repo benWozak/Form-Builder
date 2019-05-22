@@ -5,11 +5,12 @@
             <el-main>
                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover" >
                     <el-divider content-position="left"><span>Required Content</span></el-divider>
+
                     <el-card body-style="padding: 10px;" shadow="hover">
                         <span class="inputLabel">Client Name</span>
-                        <el-input class="inputField" placeholder="Name of client" v-model="input"></el-input>
+                        <el-input class="inputField" placeholder="Name of client" v-model="clientName"></el-input>
                     </el-card>
-                        
+                            
                     <el-card body-style="padding: 10px;" shadow="hover">
                         <!-- <div class="block"> -->
                             <span class="inputLabel">Date Completed</span><br>
@@ -17,7 +18,7 @@
                             </el-date-picker>
                         <!-- </div> -->
                     </el-card>
-                        
+                            
                     <el-card body-style="padding: 10px;" shadow="hover">
                         <span class="inputLabel">Department</span><br>
                         <el-select v-model="value" placeholder="Select">
@@ -78,9 +79,9 @@
                                         <div v-else-if="input.id === 10"> <!-- Phone Number -->
                                             <PhoneField/>
                                         </div>
-                                        <div v-if="form.length == 0"> <!-- No Selection -->
+                                        <!-- <div v-if="form.length == 0">
                                             <p>New fields will be placed here</p>
-                                        </div>
+                                        </div> -->
 
                             <!-- Do something else with this: section Divider -->
                                         <!-- <div v-else-if="input.id === 11"> 
@@ -144,6 +145,7 @@ export default {
     data: () => {
         return {
             visible: false,
+            clientName: '',
             dateCompleted: '',
             pickerOptions: {
                 disabledDate(time) {
@@ -175,16 +177,15 @@ export default {
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
             sectionHeader: 'New Section',
-            input: '',
-            inputType: '',
-            form: [
-                // {section: []}
-            ],
+            input: {},
+            inputType: {},
+            form: [],
             //section: []
         }
     },
     props: {
-        value: {} //placeholder
+        // value: {}, //placeholder
+        newInput: Function
     },
     components: {
         draggable,
@@ -228,6 +229,11 @@ export default {
           dangerouslyUseHTMLString: true,
           message: '<span style="font-family: Inter UI, sans-serif"><strong>Sike! Edit is not set up yet</strong></span>'
         });
+        }
+    },
+    watch: {
+        newInput() {
+            this.form.push(this.input.id)
         }
     }
 }

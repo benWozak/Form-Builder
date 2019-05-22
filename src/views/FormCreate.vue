@@ -3,7 +3,7 @@
     <h1>Form Builder</h1>
       <el-container>
         <el-aside>
-          <FormMenu @inputData="updateCanvas"/>
+          <FormMenu @inputData="updateCanvas" @inputOptions="updateCanvas"/>
         </el-aside>
   
           <el-container>
@@ -20,7 +20,7 @@
             </el-header>
     
           <el-main>
-            <FormCanvas/>
+            <FormCanvas @newInput="updateCanvas"/>
           </el-main>
         </el-container>
       </el-container>
@@ -42,12 +42,14 @@ export default {
   },
   data: () => {
     return {
-      canvasInput: {}
+      canvasInput: {},
+      inputOptions: {},
     }
   },
   methods: {
-    updateCanvas(newInput) {
+    updateCanvas(newInput, newOptions) {
       this.canvasInput = newInput;
+      this.inputOptions = newOptions;
     }
   }
 }

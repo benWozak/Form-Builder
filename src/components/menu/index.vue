@@ -103,6 +103,7 @@ export default {
         addInput() {
             //submit
             this.$emit("inputData", this.input);
+            this.$emit("inputOptons", this.options);
         }
     }
 }
