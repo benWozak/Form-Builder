@@ -20,7 +20,7 @@
                     </el-card>
                             
                     <el-card body-style="padding: 10px;" shadow="hover">
-                        <span class="inputLabel">Department</span><br>
+                        <span class="inputLabel">Team</span><br>
                         <el-select value="" placeholder="Select">
                             <el-option v-for="department in departments" :key="department.value"
                             :label="department.label" :value="department.value">
@@ -47,7 +47,6 @@
                                         <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            asdasdsa
                                             <TextBox/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
@@ -103,25 +102,6 @@
             </el-card>
             </el-main>
         </el-container>
-
-        <!-- <el-row :gutter="10">
-            <el-col class="float-left" :span="24"><div class="grid-content bg-purple-dark"></div></el-col>
-        </el-row>
-        <el-row :gutter="10">
-            <el-col class="float-left" :span="12"><div class="grid-content bg-purple"></div></el-col>
-            <el-col :span="12"><div class="grid-content bg-purple-light"></div></el-col>
-            </el-row>
-        <el-row :gutter="10">
-            <el-col class="float-left" :span="8"><div class="grid-content bg-purple"></div></el-col>
-            <el-col class="float-left" :span="8"><div class="grid-content bg-purple-light"></div></el-col>
-            <el-col class="float-left" :span="8"><div class="grid-content bg-purple"></div></el-col>
-            </el-row>
-        <el-row :gutter="10">
-            <el-col class="float-left" :span="6"><div class="grid-content bg-purple"></div></el-col>
-            <el-col class="float-left" :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-            <el-col class="float-left" :span="6"><div class="grid-content bg-purple"></div></el-col>
-            <el-col class="float-left" :span="6"><div class="grid-content bg-purple-light"></div></el-col>
-        </el-row> -->
     </div>
 </template>
 
@@ -130,17 +110,17 @@ import draggable from 'vuedraggable'
 import SidePanel from '@/components/SidePanel.vue'
 import ClickOutside from 'vue-click-outside'
 
-import TextBox from '@/components/menu/TextBox.vue'
-import TextArea from '@/components/menu/TextArea.vue'
-import EmailField from '@/components/menu/EmailField.vue'
-import AddressField from '@/components/menu/AddressField.vue'
-import CheckboxField from '@/components/menu/CheckboxField.vue'
-import DropdownField from '@/components/menu/DropdownField.vue'
-import NumericField from '@/components/menu/NumericField.vue'
-import PhoneField from '@/components/menu/PhoneField.vue'
-import RadioField from '@/components/menu/RadioField.vue'
-import DateField from '@/components/menu/DateField.vue'
-import MatrixField from '@/components/menu/MatrixField.vue'
+import TextBox from '@/components/canvas/fields/TextBox.vue'
+import TextArea from '@/components/canvas/fields/TextArea.vue'
+import EmailField from '@/components/canvas/fields/EmailField.vue'
+import AddressField from '@/components/canvas/fields/AddressField.vue'
+import CheckboxField from '@/components/canvas/fields/CheckboxField.vue'
+import DropdownField from '@/components/canvas/fields/DropdownField.vue'
+import NumericField from '@/components/canvas/fields/NumericField.vue'
+import PhoneField from '@/components/canvas/fields/PhoneField.vue'
+import RadioField from '@/components/canvas/fields/RadioField.vue'
+import DateField from '@/components/canvas/fields/DateField.vue'
+import MatrixField from '@/components/canvas/fields/MatrixField.vue'
 
 export default {
     data: () => {
@@ -185,7 +165,6 @@ export default {
         }
     },
     props: {
-        // value: {}, //placeholder
         newInput: Function,
         fields: {
             type: Array,
@@ -227,13 +206,13 @@ export default {
     },
     methods: {
         removeItem(index) {
-            this.form.splice(index, 1);
+            this.fields.splice(index, 1);
         },
         editItem(index) {
             this.$message.error({
-          dangerouslyUseHTMLString: true,
-          message: '<span style="font-family: Inter UI, sans-serif"><strong>Sike! Edit is not set up yet</strong></span>'
-        });
+            dangerouslyUseHTMLString: true,
+            message: '<span style="font-family: Inter UI, sans-serif"><strong>Sike! Edit is not set up yet</strong></span>'
+            });
         }
     },
     watch: {

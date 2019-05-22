@@ -27,9 +27,6 @@
                             <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
                             <!-- <el-button type="success" @click="setInputOptions">Set</el-button> -->
                         </el-collapse-item>
-                        <el-collapse-item title="3 - Add Field" name="3">
-                            <el-button type="success" icon="el-icon-plus" @click="addInput">Add</el-button>
-                        </el-collapse-item>
                     </el-collapse>
 
                         <!-- <div v-for="input in inputList" :key="input.id">
@@ -98,16 +95,13 @@ export default {
         setInputOptions(value) {
             this.options = value;
 
-            this.step = '3';
-        },
-        addInput() {
-            //submit
             const data = {
                 input: this.selectedInput,
                 options: this.options
             };
 
             this.$emit("add", data);
+            this.step = '1';
         }
     }
 }

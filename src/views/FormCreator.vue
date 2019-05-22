@@ -30,7 +30,7 @@
 
 <script>
 import draggable from 'vuedraggable';
-import FormCanvas from '@/components/FormCanvas.vue'
+import FormCanvas from '@/components/canvas/index.vue'
 import FormMenu from '@/components/menu/index.vue'
 
 export default {
