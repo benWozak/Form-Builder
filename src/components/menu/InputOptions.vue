@@ -1,7 +1,6 @@
 <template>
  <div id="inputOptions">
-  
-  <div>
+
    <!--------TextBox---------->
    <div v-if="inputData.id === 0">
     <h1>{{ inputData.name }} Field Options</h1>
@@ -35,12 +34,12 @@
       </el-form-item>
       
       <el-form-item>
-        <el-button type="success" @click="submitOptions">Set</el-button>
+        <el-button type="success" @click="submitOptions(options)">Set</el-button>
       </el-form-item>
     </el-form>
    </div>
 
-   <!-------- TextArea ---------->
+   <!-- 
    <div v-if="inputData.id === 1">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -59,7 +58,7 @@
     </el-form>
    </div>
 
-   <!-------- Numeric ---------->
+ 
    <div v-if="inputData.id === 2">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -75,7 +74,6 @@
     </el-form>
    </div>
 
-   <!-------- Dropdown ---------->
    <div v-if="inputData.id === 3">
     <h1>{{ inputData.name }} Field Options</h1>
      <el-form :label-position="top" ref="options" :model="options">
@@ -93,12 +91,9 @@
     <el-button @click.prevent="removeDomain(domain)">Remove</el-button>
     <el-button @click="addDomain">New Option</el-button>
   </el-form-item>
-  <el-form-item>
-    <!-- <el-button type="primary" @click="submitForm('dropdownItems')">Submit</el-button> --> 
-  </el-form-item>
 
       <el-form-item>
-        <el-button type="success" @click="submitOptions">Set</el-button>
+        <el-button type="success" @click="submitOptions(options)">Set</el-button>
       </el-form-item>
     </el-form>
    </div>
@@ -206,8 +201,8 @@
         <el-button type="success" @click="submitOptions">Set</el-button>
       </el-form-item>
     </el-form>
-   </div>
-  </div>
+   </div>-->
+ 
 
  </div>
 </template>
@@ -217,6 +212,7 @@ export default {
  name: 'inputOptions',
  data: () => {
   return {
+   top: 'top', //TEMP fix. Just gets rid of console warning for elementUI property
    options: {
      title: '',
      required: false,
@@ -229,12 +225,12 @@ export default {
       }]
     }
    },
-   step: '3'
   }
  },
  props: {
    inputData: Object,
-   // outputData: Object
+   // outputData: Object,
+   // step: String
  },
  methods: {
   removeDomain(item) {
@@ -249,10 +245,10 @@ export default {
       value: ''
     });
   },
-  submitOptions() {
-   this.options = this.outputData;
-    this.$emit('submitOptions', this.outputData)
-    this.$emit('sumbitOptions', this.step)
+  submitOptions(options) {
+    // this.options = this.outputData;
+    // this.outputData = Object.assign({}, options);
+    this.$emit('outputData', this.options);
   }
  }
 }
