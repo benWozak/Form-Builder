@@ -1,13 +1,51 @@
 <template>
     <div id="textarea">
-        <span class="inputLabel"></span><br>
-        <el-input type="textarea" :rows="2" placeholder="Your text here" v-model="customArea"></el-input>
+        <el-collapse>
+            <span class="inputLabel">{{ options.setLabel }}</span><br>
+            <el-collapse-item name="1">
+                <template slot="title">
+                    <el-input type="textarea" :rows="2" :maxlength="options.setLength" show-word-limit placeholder="Your text here" v-model="customArea"></el-input>
+                </template>
+                <div>
+                    <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
+                    <el-form-item label="Field Label">
+                        <el-input v-model="options.setLabel"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+                    </el-form-item>
+                    <el-form-item label="Set Character Limit">
+                    <el-input-number v-model="options.setLength" :step="5" step-strictly></el-input-number>
+                    </el-form-item>
+                    <!-- <el-form-item>
+                        <el-button type="success" @click="submitOptions">Set Changes</el-button>
+                    </el-form-item> -->
+                    </el-form>
+                </div>
+            </el-collapse-item>
+        </el-collapse>
     </div>
 </template>
 
 <script>
 export default {
-
+    data() {
+        return {
+            customArea: '',
+            options: {
+                setLabel: 'Text Area',
+                required: false,
+                reference: '',
+                setLength: 50,
+                dropdownItems: {
+                domains: [{
+                        key:1,
+                        value:''
+                    }]
+                }
+            },
+        }
+    }
 }
 </script>
 

@@ -51,7 +51,7 @@ export default {
             selectedInput: {id: '', name: '', component: ''},
             // selectedInput: '',
             basicInputs: [
-                {id: 0, name: 'Text Box', component: 'TexBox'},
+                {id: 0, name: 'Text Field', component: 'TexBox'},
                 {id: 1, name: 'Text Area', component: 'TexArea'},
                 {id: 2, name: 'Numeric', component: 'NumericField'},
                 {id: 3, name: 'Dropdown', component: 'DropdownField'},

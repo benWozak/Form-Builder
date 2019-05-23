@@ -76,6 +76,9 @@ export default {
     color: #333;
     background-color: rgb(238, 241, 246);
     flex-shrink: inherit;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
     min-width: 180px;
     max-width: 320px;
     max-height: 800px;

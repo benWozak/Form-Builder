@@ -34,7 +34,7 @@
             <el-card body-style="padding: 10px;" shadow="hover">
                 <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                     <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
-                        <div v-for="(inputType, index) in fields" :item="inputType" :key="index">
+                        <div v-for="inputType in fields" :key="inputType">
                             <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
                                 <el-popover placement="top-end" width="250" trigger="hover" content="">
@@ -42,12 +42,12 @@
                                     <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button>
                                             
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
-                                        {{ inputType.input.name }}
+                                        <!-- {{ inputType.input.name }} -->
                                         
                                         <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            <TextBox/>
+                                            <TextField/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                             <TextArea/>
@@ -65,10 +65,10 @@
                                             <CheckboxField/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 6"> <!-- Matrix Field -->
-                                            <MatrixField/>
+                                            <DateField/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 7"> <!-- Date Field -->
-                                            <DateField/>
+                                            <MatrixField/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 8"> <!-- Email -->
                                             <EmailField/>
@@ -110,7 +110,7 @@ import draggable from 'vuedraggable'
 import SidePanel from '@/components/SidePanel.vue'
 import ClickOutside from 'vue-click-outside'
 
-import TextBox from '@/components/canvas/fields/TextBox.vue'
+import TextField from '@/components/canvas/fields/TextField.vue'
 import TextArea from '@/components/canvas/fields/TextArea.vue'
 import EmailField from '@/components/canvas/fields/EmailField.vue'
 import AddressField from '@/components/canvas/fields/AddressField.vue'
@@ -174,7 +174,7 @@ export default {
     components: {
         draggable,
         SidePanel,
-        TextBox,
+        TextField,
         TextArea,
         EmailField,
         NumericField,
@@ -195,14 +195,14 @@ export default {
                 this.form = value
             }
         },
-        sectionList: {
-            get() {
-                return this.formList.section
-            },
-            set(value) {
-                this.formList.section = value
-            }
-        }
+        // sectionList: {
+        //     get() {
+        //         return this.formList.section
+        //     },
+        //     set(value) {
+        //         this.formList.section = value
+        //     }
+        // }
     },
     methods: {
         removeItem(index) {

@@ -1,22 +1,22 @@
 <template>
     <div id="datepciker">
         <span class="inputLabel">{{ dateLabel }}</span><br>
-        <div v-if="dateType.value === 0">
+         <div> <!--v-if="dateType.id === 0"> -->
             <el-date-picker v-model="dateSelection" type="date" placeholder="Pick a day">
             </el-date-picker>
         </div>
-        <div v-if="dateType.value === 1">
+        <!-- <div v-if="dateType.id === 1">
             <el-date-picker v-model="dateSelection" type="date" placeholder="Pick a day" :picker-options="pastOptions">
             </el-date-picker>
         </div>
-        <div v-if="dateType.value === 2">
+        <div v-if="dateType.id === 2">
             <el-date-picker v-model="dateSelection" type="daterange"
                 range-separator="To"
                 start-placeholder="Start date"
                 end-placeholder="End date">
             </el-date-picker>
-        </div>
-        <div v-if="dateType.value === 0"></div>
+        </div> -->
+        <!-- <div v-if="dateType.id === 0"></div> -->
     </div>
 </template>
 
@@ -27,9 +27,9 @@ export default {
             dateLabel: '',
             dateSelection: '',
             dateType: [
-                {value: 0, type: 'default', rules: 'none'},
-                {value: 1, type: 'pastTense', rules: 'pastOptions'},
-                {value: 2, type: 'dateRange', rules: 'rangeOptions'},
+                {id: 0, type: 'default', rules: 'none'},
+                {id: 1, type: 'pastTense', rules: 'pastOptions'},
+                {id: 2, type: 'dateRange', rules: 'rangeOptions'},
                 
             ],
             pastOptions: {
