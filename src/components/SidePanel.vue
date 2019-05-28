@@ -8,7 +8,7 @@
         
 
         <transition name="toggle">
-            <div v-click-outside="hide" v-show="opened" class="panel lg:w-1/2 w-full">
+            <div v-click-outside="hide" v-show="opened" class="panel lg:w-1/4 w-full">
                 <a href="javascript:void(0)" class="close" @click="hide">&times;</a>
                 <slot></slot>
             </div>

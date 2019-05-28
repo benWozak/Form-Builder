@@ -18,9 +18,7 @@
               <!-- Right aligned side panel -->
               <div v-click-outside="hide">
                 <SidePanel>
-                  <template slot="button-text">
-                    
-                  </template>
+                  <template slot="button-text"></template>
                   <h1 :data="tableData">Options: {{ tableData.form }}</h1>
                     <el-row :gutter="10">
                       <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">Lorem, ipsum dolor.</el-col>

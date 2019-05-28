@@ -14,9 +14,7 @@
                         <el-form-item>
                             <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
                         </el-form-item>
-                        <!-- <el-form-item>
-                            <el-button type="success" @click="submitOptions">Set</el-button>
-                        </el-form-item> -->
+                        
                     </el-form>
                 </div>
             </el-collapse-item>

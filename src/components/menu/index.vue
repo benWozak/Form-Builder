@@ -6,7 +6,7 @@
             <el-row type="flex" :gutter="4">
                 <el-col :span="4">
                     <!-- <draggable v-model="inputList" :options="{group: {name:'inputs', pull:'clone', put:'false'}}" > -->
-                    <el-collapse v-model="step" @change="handleChange" accordion>
+                    <el-collapse v-model="step" accordion>
                         <el-collapse-item title="1 - Select a Field" name="1">
                             <h1>Basic Inputs</h1>
                             <div v-for="input in basicInputs" :key="input.id" @click="selectInput(input)">
@@ -82,9 +82,6 @@ export default {
         
     },
     methods: {
-        handleChange(val) {
-            console.log(val);
-        },
         selectInput(input) {
             console.log(input.name);
             this.selectedInput = Object.assign({}, input);

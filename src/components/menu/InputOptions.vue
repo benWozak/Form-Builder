@@ -158,6 +158,20 @@
       <el-form-item>
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
+      <el-form-item label="Number of Questions" >
+         <el-input-number v-model="options.matrixQuestions"
+            controls-position="right" 
+            @change="handleChange" 
+            :min="2">
+          </el-input-number>
+      </el-form-item>
+      <el-form-item label="Number of Choices Per Question">
+         <el-input-number v-model="options.matrixChoices"
+            controls-position="right" 
+            @change="handleChange" 
+            :min="2" :max="10">
+          </el-input-number>
+      </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
       </el-form-item>
@@ -228,6 +242,8 @@ export default {
      dropdownNum: 2,
      radioNum: 2,
      checkboxNum: 2,
+     matrixQuestions: 2,
+     matrixChoices: 5,
      setLabel: 50,
      dropdownItems: {
       domains: [{
@@ -242,6 +258,9 @@ export default {
    inputData: Object,
  },
  methods: {
+  handleChange() {
+    console.log('handling change');
+  },
   removeDomain(item) {
     var index = this.options.dropdownItems.domains.indexOf(item);
     if (index !== -1) {
