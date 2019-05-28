@@ -1,5 +1,5 @@
 <template>
-  <div class="Forms">
+  <div class="Forms bg-red">
     <FormList/>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Forms</router-link> |
+    <div id="nav" class="bg-gray-200">
+      <router-link class="font-semibold" to="/">Forms</router-link> |
       <router-link to="/NewForm">New Form</router-link>
     </div>
     <router-view/>
@@ -9,9 +9,9 @@
 </template>
 
 <style>
-/* @tailwind base;
+@tailwind base;
 @tailwind components;
-@tailwind utilities; */
+@tailwind utilities;
 
 #app {
   font-family: 'Inter UI', sans-serif;
