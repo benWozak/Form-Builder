@@ -9,9 +9,9 @@
 </template>
 
 <style>
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 #app {
   font-family: 'Inter UI', sans-serif;
