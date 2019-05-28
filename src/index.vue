@@ -9,6 +9,10 @@
 </template>
 
 <style>
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 #app {
   font-family: 'Inter UI', sans-serif;
   -webkit-font-smoothing: antialiased;

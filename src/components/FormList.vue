@@ -5,7 +5,7 @@
     <el-container class="form-list">
       <el-main>
         <el-table 
-          :data="tableData.filter(data => !search || data.form.toLowerCase().includes(search.toLowerCase()))" style="width: 100%">
+          :data="tableData.filter(data => !search || data.form.toLowerCase().includes(search.toLowerCase()))" style="width: 120%">
           <el-table-column class="text-left" prop="form" label="Enabled Forms" width="180"></el-table-column>
           <el-table-column align="right" prop="date" label="Last Entry" width="180"></el-table-column>
           <el-table-column align="right">
@@ -17,55 +17,42 @@
             <template slot-scope="{}">
               <!-- Right aligned side panel -->
               <div v-click-outside="hide">
-                <SidePanel/>
+                <SidePanel>
+                  <template slot="button-text">
+                    
+                  </template>
+                  <h1 :data="tableData">Options: {{ tableData.form }}</h1>
+                    <el-row :gutter="10">
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">Lorem, ipsum dolor.</el-col>
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">
+                        <el-switch v-model="value3" active-text="on" inactive-text="off">Lorem, ipsum.</el-switch>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="10">
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">Lorem ipsum dolor sit.</el-col>
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">
+                        <el-switch v-model="value3" active-text="on" inactive-text="off"></el-switch>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="10">
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">Lorem ipsum dolor sit amet consectetur.</el-col>
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">
+                        <el-switch v-model="value3" active-text="on" inactive-text="off"></el-switch>
+                      </el-col>
+                  </el-row>
+                  <el-row :gutter="10">
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</el-col>
+                      <el-col :xs="8" :sm="6" :md="12" :lg="12" :xl="12">
+                        <el-switch v-model="value3" active-text="on" inactive-text="off"></el-switch>
+                      </el-col>
+                  </el-row>
+                </SidePanel>
               </div>
             </template>
           </el-table-column>
         </el-table>
       </el-main>
-    </el-container>
-
-    <!-- <el-dialog title="Form Options" :visible.sync="dialogVisible"> 
-      <el-form :model="optionItems">
-        <el-row :gutter="10">
-          <el-col :xs="16" :sm="16" :md="18" :lg="23" :xl="23">
-            <el-form-item label="Export to dashlet">
-              <el-radio-group v-model="optionItems.dashlet">
-                <el-radio label="Yes"></el-radio>
-                <el-radio label="No"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <el-row :gutter="10">
-          <el-col :xs="16" :sm="16" :md="16" :lg="20" :xl="20">
-            <el-form-item label="Display on sidebar for Quick Access">  
-              <el-radio-group v-model="optionItems.quickAccess">
-                <el-radio label="Yes"></el-radio>
-                <el-radio label="No" true></el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-        </el-row>
-
-        <el-row :gutter="10">
-          <el-col :xs="16" :sm="16" :md="18" :lg="23" :xl="23">
-            <el-form-item label="Disable this form">  
-              <el-radio-group v-model="optionItems.disable">
-                <el-radio label="Yes"></el-radio>
-                <el-radio label="No"></el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">Cancel</el-button>
-        <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
-      </span>
-    </el-dialog> -->
-      
+    </el-container>  
   </div>
 </template>
 
@@ -129,18 +116,21 @@ export default {
     border: 1px solid #eee;
     margin: auto;
     width: 70%;
-    padding: 10px;
+    padding: 12px;
   }
   .search-field {
     display: inline-block;
     width: 330px;
 
   }
-    .el-col {
-    border-radius: 4px;
-  }
   .grid-content {
     border-radius: 4px;
     min-height: 36px;
+  }
+  .el-col {
+    padding-top: 50px;
+    /* white-space: normal; */
+    word-break: break-word;
+    border-radius: 4px;
   }
 </style>

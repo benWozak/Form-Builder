@@ -1,18 +1,18 @@
 <template>
     <div id="menu">
-        <el-button type="text" @click="toggle">&#9776; OPTIONS</el-button>
+        
+        <!-- TODO: Move this outside of component -->
+        <slot name="button">
+            <el-button type="text" @click="toggle"><slot name="button-text">&#9776; options</slot></el-button>
+        </slot>
+        
 
-        <div v-click-outside="hide" v-show="opened" class="options" v-bind:style="{ width: divWidth + 'px' }">
-            <a href="javascript:void(0)" class="close" @click="hide">&times;</a>
-            <a href="#">Lets figure out</a>
-            <a href="#">how to make this</a>
-            <a href="#">reusable</a> 
-            <a href="#">everywhere</a>
-        </div>
-
-<!-- <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span> -->
-
-        <!-- <el-dialog title="Form Options" :visible.sync="dialogVisible">Hey</el-dialog> -->
+        <transition name="toggle">
+            <div v-click-outside="hide" v-show="opened" class="panel" v-bind:style="{ width: divWidth + 'px' }">
+                <a href="javascript:void(0)" class="close" @click="hide">&times;</a>
+                <slot></slot>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -31,11 +31,11 @@ export default {
         toggle() {
             this.opened = true;
             this.divWidth = 350;
-            //document.getElementById("options-menu").style.width = "350px";
+            //document.getElementById("panel-menu").style.width = "350px";
         },
         hide() {
             this.opened = false
-            //document.getElementById("options-menu").style.width = "0";
+            //document.getElementById("panel-menu").style.width = "0";
         }
     },
     mounted() {
@@ -49,32 +49,40 @@ export default {
 </script>
 
 <style>
-    .enter-active, .leave-active {
-        transition: .5s;
+    .toggle-enter-active {
+        transition: 1s ease;
     }
-    .enter, .leave-to {
-        opacity: 0;
+    .toggle-leave-active {
+        transition: 1s ease;
+        /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */
     }
-    .options {
+
+    .toggle-enter, .toggle-leave-to {
+        transform: translateX(100%);
+        /* opacity: 0; */
+    }
+    .panel {
         height: 100%;
         width: 0;
         position: fixed;
         z-index: 1;
         top: 0;
         right: 0;
-        background-color: #EEF1F6;
+        background-color: #ffffff;
         overflow-x: hidden;
-        transition: 0.5s;
-        /* padding-top: 60px; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        text-align: left;
+        padding-left: 20px;
     }
 
-    .options a {
+    .panel a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 25px;
         color: #818181;
         display: block;
         transition: 0.2s;
+        text-align: right;
     }
 
     .sidenav a:hover {
