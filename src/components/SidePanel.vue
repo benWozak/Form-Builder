@@ -8,7 +8,7 @@
         
 
         <transition name="toggle">
-            <div v-click-outside="hide" v-show="opened" class="panel" v-bind:style="{ width: divWidth + 'px' }">
+            <div v-click-outside="hide" v-show="opened" class="panel lg:w-1/2 w-full">
                 <a href="javascript:void(0)" class="close" @click="hide">&times;</a>
                 <slot></slot>
             </div>
@@ -61,9 +61,9 @@ export default {
         transform: translateX(100%);
         /* opacity: 0; */
     }
+
     .panel {
         height: 100%;
-        width: 0;
         position: fixed;
         z-index: 1;
         top: 0;
