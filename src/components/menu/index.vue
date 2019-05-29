@@ -1,11 +1,8 @@
 <template>
     <div id="menu">
         <div class="menu-container">
-            <!-- <h1>Input Fields Menu</h1> -->
-        
             <el-row type="flex" :gutter="4">
                 <el-col :span="4">
-                    <!-- <draggable v-model="inputList" :options="{group: {name:'inputs', pull:'clone', put:'false'}}" > -->
                     <el-collapse v-model="step" accordion>
                         <el-collapse-item title="1 - Select a Field" name="1">
                             <h1>Basic Inputs</h1>
@@ -14,18 +11,17 @@
                                     {{ input.name }}
                                 </el-card>
                             </div>
-                        <!-- <el-divider></el-divider> -->
+
                             <h1>Preset Inputs</h1>
-                           <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
+                            <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
                                 <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover">
                                     {{ input.name }}
                                 </el-card>
                             </div>
-                        <!-- <el-divider></el-divider> -->
                         </el-collapse-item>
+
                         <el-collapse-item title="2 - Set Field Requirements" name="2">
                             <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
-                            <!-- <el-button type="success" @click="setInputOptions">Set</el-button> -->
                         </el-collapse-item>
                     </el-collapse>
 
@@ -49,7 +45,6 @@ export default {
         return {
             step: '1',
             selectedInput: {id: '', name: '', component: ''},
-            // selectedInput: '',
             basicInputs: [
                 {id: 0, name: 'Text Field', component: 'TexBox'},
                 {id: 1, name: 'Text Area', component: 'TexArea'},
@@ -96,7 +91,6 @@ export default {
                 input: this.selectedInput,
                 options: this.options
             };
-
             this.$emit("add", data);
             this.step = '1';
         }

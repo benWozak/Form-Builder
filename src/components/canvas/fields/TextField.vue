@@ -7,8 +7,7 @@
                     <el-input type="text" v-model="customField"></el-input>
                 </template>
 
-                    <div>
-                        <br>
+                    <div><br>
                         <el-form label-position="top" ref="options" :model="options" :rules="rules" @submit.native.prevent>
                         <el-form-item label="Field Label">
                             <el-input v-model="options.setLabel"></el-input>
@@ -39,9 +38,9 @@
                             </div>
                         </el-form-item>
                         
-                        <!-- <el-form-item>
-                            <el-button type="success" @click="submitOptions(options)">Set Changes</el-button>
-                        </el-form-item> -->
+                        
+                            <!-- <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
+                            <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                         </el-form>
                     </div>
             </el-collapse-item>
@@ -77,6 +76,17 @@ export default {
           ]
         }
       }
+    },
+    methods: {
+        // removeItem(index) {
+        //     this.fields.splice(index, 1);
+        // },
+        // editItem(index) {
+        //     this.$message.error({
+        //     dangerouslyUseHTMLString: true,
+        //     message: '<span style="font-family: Inter UI, sans-serif"><strong>Sike! Edit is not set up yet</strong></span>'
+        //     });
+        // }
     },
 }
 </script>

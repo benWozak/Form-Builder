@@ -20,7 +20,7 @@
             </el-header>
     
           <el-main>
-            <FormCanvas :fields="fields"/>
+            <FormCanvas :fields="fields" @inputOptions="setOptions"/>
           </el-main>
         </el-container>
       </el-container>
@@ -42,7 +42,7 @@ export default {
   },
   data: () => {
     return {
-      canvasInput: {},
+      //canvasInput: {},
       inputOptions: {},
       fields: []
     }
@@ -52,7 +52,11 @@ export default {
       // append to fields
       this.fields.push(field);
     },
-
+    setOptions(options) {
+      this.inputOptions.push(options)
+      console.log(this.inputOptions.title);
+      // this.$emit()
+    },
     updateCanvas(data) {
       this.canvasInput = data.input;
       this.inputOptions = data.options;

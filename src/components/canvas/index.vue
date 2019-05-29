@@ -41,16 +41,17 @@
                                     <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
                                     <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button>
                                             
-                                    <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover" >
+                                    <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover">
                                         <!-- {{ inputType.input.name }} -->
                                         
                                         <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            <TextField/>
+                                            <TextField :options="inputOptions"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                             <TextArea/>
+                                            <!-- <el-button v-show="visible" type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                                         </div>
                                         <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                             <NumericField/>
@@ -160,6 +161,7 @@ export default {
             sectionHeader: 'New Section',
             input: {},
             inputType: {},
+            inputOptions: {},
             form: [],
             //section: []
         }
@@ -169,7 +171,8 @@ export default {
         fields: {
             type: Array,
             default: []
-        }
+        },
+        options: Function
     },
     components: {
         draggable,
@@ -216,12 +219,14 @@ export default {
         }
     },
     watch: {
+        mouseOver: function(){
+            this.visible = !this.visible;   
+        },
         newInput() {
             this.form.push(this.input.id)
         },
-
-        fields() {
-            console.log(this.fields);
+        inputOptions() {
+            console.log(this.options);
         }
     }
 }
