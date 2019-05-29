@@ -1,7 +1,7 @@
 <template>
     <div id="textbox">
         <el-collapse>
-            <span class="inputLabel">{{ options.setLabel }}</span><br>
+            <span class="inputLabel">{{ options.title }}</span><br>
             <el-collapse-item name="1">
                 <template slot="title">
                     <el-input type="text" v-model="customField"></el-input>
@@ -10,7 +10,7 @@
                     <div><br>
                         <el-form label-position="top" ref="options" :model="options" :rules="rules" @submit.native.prevent>
                         <el-form-item label="Field Label">
-                            <el-input v-model="options.setLabel"></el-input>
+                            <el-input v-model="options.title"></el-input>
                         </el-form-item>
                         <el-form-item label="This field is:" prop="customField">
                             <el-switch v-model="options.isRequired" active-text="Required" inactive-text="Optional" 
@@ -54,8 +54,14 @@ export default {
         return {
             customField: '',
             setLength: 50,
-            options: {
-                setLabel: 'Text Field',
+        }
+    },
+
+    props: {
+        options: {
+            type: Array | Object,
+            default: {
+                title: 'Text Field',
                 isRequired: false,
                 reference: '',
                 charCount: 50,
@@ -68,6 +74,7 @@ export default {
             }
         }
     },
+
     computed: {
       rules() {
         return { 

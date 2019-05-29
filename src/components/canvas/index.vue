@@ -33,13 +33,13 @@
 
             <el-card body-style="padding: 10px;" shadow="hover">
                 <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
-                    <draggable class="dropArea" v-model="formList" :options='{group: "inputs"}'>
-                        <div v-for="inputType in fields" :key="inputType">
+                    <draggable class="dropArea" v-model="fieldList">
+                        <div v-for="(inputType, index) in fieldList" :key="index">
                             <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
                                 <el-popover placement="top-end" width="250" trigger="hover" content="">
-                                    <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
-                                    <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button>
+                                    <el-button type="info" icon="el-icon-edit" @click="editItem(index)">EDIT</el-button>
+                                    <el-button type="warning" icon="el-icon-delete" @click="removeItem(index)">REMOVE</el-button>
                                             
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover">
                                         <!-- {{ inputType.input.name }} -->
@@ -47,7 +47,7 @@
                                         <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            <TextField :options="inputOptions"/>
+                                            <TextField :options="fields[index].options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                             <TextArea/>
@@ -129,6 +129,7 @@ export default {
             visible: false,
             clientName: '',
             dateCompleted: '',
+            fieldList: [],
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -190,14 +191,14 @@ export default {
         MatrixField,
     },
     computed: {
-        formList: {
-            get() {
-                return this.form
-            },
-            set(value) {
-                this.form = value
-            }
-        },
+        // formList: {
+        //     get() {
+        //         return this.form
+        //     },
+        //     set(value) {
+        //         this.form = value
+        //     }
+        // },
         // sectionList: {
         //     get() {
         //         return this.formList.section
@@ -209,6 +210,8 @@ export default {
     },
     methods: {
         removeItem(index) {
+            alert(index);
+
             this.fields.splice(index, 1);
         },
         editItem(index) {
@@ -225,8 +228,8 @@ export default {
         newInput() {
             this.form.push(this.input.id)
         },
-        inputOptions() {
-            console.log(this.options);
+        fields: function() {
+            this.fieldList = _.clone(this.fields);
         }
     }
 }

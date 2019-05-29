@@ -88,8 +88,8 @@ export default {
             this.options = value;
 
             const data = {
-                input: this.selectedInput,
-                options: this.options
+                input: _.clone(this.selectedInput),
+                options: _.clone(this.options)
             };
             this.$emit("add", data);
             this.step = '1';

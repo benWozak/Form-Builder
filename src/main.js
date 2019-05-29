@@ -6,7 +6,9 @@ import draggable from 'vuedraggable'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { Button, Select } from 'element-ui';
-import locale from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale/lang/en';
+
+window._ = require('lodash');
 
 
 Vue.config.productionTip = false
