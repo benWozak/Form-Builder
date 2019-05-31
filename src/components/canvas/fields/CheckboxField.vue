@@ -1,32 +1,39 @@
 <template>
-    <div id="radio">
+    <div id="dropdown">
          <el-collapse>
-            <span class="inputLabel">{{ options.setLabel }}</span><br>
-            <el-collapse-item name="1">
+            <span class="inputLabel">{{ options.title }}</span><br>
+            <el-collapse-item>
                 <template slot="title">
-                   <el-checkbox-group v-model="checkList">
-                        <el-checkbox label="1">{{ option }}</el-checkbox>
-                        <el-checkbox label="2">{{ option }}</el-checkbox>
-                        <el-checkbox label="3">{{ option }}</el-checkbox>
+                    <el-checkbox-group v-for="item in checkList" :key="item.value">
+                        <el-checkbox v-model="item.value" :label="item.value">{{ item.value }}</el-checkbox>
                     </el-checkbox-group>
                 </template>
-                <div>
-                    <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-                        <el-form-item label="Field Label">
-                            <el-input v-model="options.setLabel"></el-input>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-                        </el-form-item>
-                        <el-form-item v-for="(domain, index) in options.dropdownItems.domains" :label="'Option ' + index" :key="domain.key" :prop="'domains.' + index + '.value'"
-                            :rules="{ required: true, message: 'Field can not be null', trigger: 'blur' }">
-                            <el-input v-model="domain.value" placeholder="Option Title"></el-input>
-                            
-                            <el-button @click.prevent="removeDomain(domain)">Remove</el-button>
-                            <el-button @click="addDomain">New Option</el-button>
-                        </el-form-item>
+                <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
+                    <el-form-item label="Field Label">
+                        <el-input v-model="options.title"></el-input>
+                    </el-form-item>
+                    <el-form-item>
+                       <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+                    </el-form-item>
+                </el-form>
+                <el-form>
+                    <el-form-item label="Check box Items"></el-form-item>
+                </el-form>
+                    <ul>
+                        <li v-for="item in checkList" :key="item.id" >
+                            <span v-show="!showField('value')" @click="focusField('value')">
+                                {{ item.value }}
+                            </span>
+                            <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
+                        </li>
+                    </ul>
+                <form @submit.prevent="addItem">
+                    <el-form>
+                        <el-form-item label="Add Item to List"></el-form-item>
                     </el-form>
-                </div>
+                    <el-input v-model="itemText"></el-input>
+                    <el-button type="success" @click="addItem">Add</el-button>
+                </form>
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -36,41 +43,65 @@
 export default {
     data() {
         return {
-            customArea: '',
-            radio: [
-                {label: 0, text: 'option'}
-            ],
-            options: {
-                setLabel: 'Check Box',
-                required: false,
-                reference: '',
-                setLength: 50,
-                dropdownItems: {
-                domains: [{
-                        key:1,
-                        value:''
-                    }]
-                }
-            },
+            itemText: '',
+            value: '',
+            editField: '',
+            checkList: [],
+            nextItem: 0
         }
     },
+    props: {
+        options: {
+            type: Array | Object,
+            default: {
+                title: 'Dropdown',
+                required: false,
+                reference: '',
+                dropdownNum: 0,
+                radioNum: 2,
+                checkboxNum: 2,
+                matrixQuestions: 2,
+                matrixChoices: 5,
+                setLength: 50,
+            }
+        }
+    },
+    mounted: function() {
+        this.setCheckboxItems(); // calls method upon being rendered in the DOM
+    },
     methods: {
-        removeDomain(item) {
-            var index = this.options.dropdownItems.domains.indexOf(item);
-            if (index !== -1) {
-            this.options.dropdownItems.domains.splice(index, 1);
+        addItem: function() {
+            this.checkList.push({
+                id: this.nextItem++, value: this.itemText
+            })
+            this.itemText = ''
+        },
+        loadItem: function() {
+            this.checkList.push({
+                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
+            })
+        },
+        setCheckboxItems() {
+            var i;
+            for(i= 0; i < this.options.checkboxNum; i++) {
+                this.loadItem();
             }
         },
-        addDomain() {
-            this.options.dropdownItems.domains.push({
-            key: Date.now(),
-            value: ''
-            });
+        focusField(value){
+            this.editField = value;
+        },
+        blurField(){
+            this.editField = '';
+        },
+        showField(value){
+            return (this.checkList[value] == '' || this.editField == value)
         }
     }
 }
 </script>
 
 <style>
-
+ul {
+  list-style-type: none;
+}
 </style>

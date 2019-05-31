@@ -42,43 +42,40 @@
                                     <el-button type="warning" icon="el-icon-delete" @click="removeItem(index)">REMOVE</el-button>
                                             
                                     <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                                        <!-- {{ inputType.input.name }} -->
-                                        
-                                        <!-- <slot :selectedInput="selectedInput"></slot> -->
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            <TextField :options="fields[index].options"/>
+                                            <TextField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
-                                            <TextArea/>
+                                            <TextArea :options="inputType.options"/>
                                             <!-- <el-button v-show="visible" type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                                         </div>
                                         <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
-                                            <NumericField/>
+                                            <NumericField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
-                                            <DropdownField/>
+                                            <DropdownField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
-                                            <RadioField/>
+                                            <RadioField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
-                                            <CheckboxField/>
+                                            <CheckboxField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 6"> <!-- Matrix Field -->
-                                            <DateField/>
+                                            <DateField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 7"> <!-- Date Field -->
-                                            <MatrixField/>
+                                            <MatrixField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 8"> <!-- Email -->
-                                            <EmailField/>
+                                            <EmailField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 9"> <!-- Address -->
-                                            <AddressField/>
+                                            <AddressField :options="inputType.options"/>
                                         </div>
                                         <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
-                                            <PhoneField/>
+                                            <PhoneField :options="inputType.options"/>
                                         </div>
                                         <!-- <div v-if="form.length == 0">
                                             <p>New fields will be placed here</p>
@@ -163,8 +160,6 @@ export default {
             input: {},
             inputType: {},
             inputOptions: {},
-            form: [],
-            //section: []
         }
     },
     props: {
@@ -191,22 +186,7 @@ export default {
         MatrixField,
     },
     computed: {
-        // formList: {
-        //     get() {
-        //         return this.form
-        //     },
-        //     set(value) {
-        //         this.form = value
-        //     }
-        // },
-        // sectionList: {
-        //     get() {
-        //         return this.formList.section
-        //     },
-        //     set(value) {
-        //         this.formList.section = value
-        //     }
-        // }
+        
     },
     methods: {
         removeItem(index) {
@@ -217,7 +197,7 @@ export default {
         editItem(index) {
             this.$message.error({
             dangerouslyUseHTMLString: true,
-            message: '<span style="font-family: Inter UI, sans-serif"><strong>Sike! Edit is not set up yet</strong></span>'
+            message: '<span style="font-family: Inter UI, sans-serif"><strong>Probably wont be using this</strong></span>'
             });
         }
     },
@@ -228,7 +208,7 @@ export default {
         newInput() {
             this.form.push(this.input.id)
         },
-        fields: function() {
+        fields() {
             this.fieldList = _.clone(this.fields);
         }
     }
@@ -241,8 +221,8 @@ export default {
 @tailwind utilities;
 
 #canvas {
-  /* font-family: 'Avenir', Helvetica, Arial, sans-serif; */
-  font-family: sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif; 
+  /* font-family: sans-serif; */
   font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -270,23 +250,4 @@ export default {
   .el-divider span {
       font-size: 18px;
   }
-
-
-  /* .bg-purple-dark {
-    background: #99a9bf;
-  }
-  .bg-purple {
-    background: #d3dce6;
-  }
-  .bg-purple-light {
-    background: #e5e9f2;
-  }
-  .grid-content {
-    border-radius: 4px;
-    min-height: 50px;
-  }
-  .row-bg {
-    padding: 10px 0;
-    background-color: #f9fafc;
-  } */
 </style>

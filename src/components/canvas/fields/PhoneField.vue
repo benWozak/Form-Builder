@@ -7,7 +7,41 @@
 
 <script>
 export default {
-
+    data: () => {
+        
+    },
+    props: {
+        options: {
+            type: Array | Object,
+            default: {
+                title: 'Phone',
+                required: false,
+                reference: '',
+                dropdownNum: 2,
+                radioNum: 2,
+                checkboxNum: 2,
+                matrixQuestions: 2,
+                matrixChoices: 5,
+                setLength: 50,
+                dropdownItems: {
+                    domains: [{
+                        key:1,
+                        value:''
+                    }]
+                }
+                // title: 'Text Field',
+                // isRequired: false,
+                // reference: '',
+                // charCount: 50,
+                // dropdownItems: {
+                //         domains: [{
+                //         key:1,
+                //         value:''
+                //     }]
+                // }
+            }
+        }
+    },
 }
 </script>
 

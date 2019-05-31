@@ -1,7 +1,10 @@
+<!-- 
+    This is a Global Component
+-->
 <template>
     <div id="menu">
         
-        <!-- TODO: Move this outside of component -->
+        
         <slot name="button">
             <el-button type="text" @click="toggle"><slot name="button-text">&#9776; options</slot></el-button>
         </slot>

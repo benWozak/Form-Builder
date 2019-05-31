@@ -4,7 +4,7 @@
    <!--------TextBox---------->
    <div v-if="inputData.id === 0">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -42,7 +42,7 @@
    <!--------TextArea---------->
    <div v-if="inputData.id === 1">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -50,7 +50,7 @@
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Set Character Limit">
-       <el-input-number v-model="options.setLabel" :step="5" step-strictly></el-input-number>
+       <el-input-number v-model="options.setLength" :step="5" step-strictly></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
@@ -61,7 +61,7 @@
   <!---------Numeric--------->
    <div v-if="inputData.id === 2">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -77,7 +77,7 @@
    <!--------Dropdown---------->
    <div v-if="inputData.id === 3">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -85,7 +85,7 @@
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
-         <el-input-number v-model="options.dropdownNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+         <el-input-number v-model="options.dropdownNum" controls-position="right" @change="handleChange" :min="2" :max="10"></el-input-number>
       </el-form-item>
 
       <el-form-item>
@@ -97,7 +97,7 @@
    <!--------Radio---------->
    <div v-if="inputData.id === 4">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -116,7 +116,7 @@
    <!--------Checkbox---------->
    <div v-if="inputData.id === 5">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -135,7 +135,7 @@
    <!--------Date Field---------->
    <div v-if="inputData.id === 6">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -151,7 +151,7 @@
   <!--------Matrix---------->
   <div v-if="inputData.id === 7">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -181,7 +181,7 @@
    <!--------Email---------->
    <div v-if="inputData.id === 8">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -197,7 +197,7 @@
    <!--------Address---------->
    <div v-if="inputData.id === 9">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -213,7 +213,7 @@
    <!--------Phone Number---------->
    <div v-if="inputData.id === 10">
     <h1>{{ inputData.name }} Field Options</h1>
-     <el-form label-position="top" ref="options" :model="options">
+     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
@@ -239,18 +239,18 @@ export default {
      title: '',
      required: false,
      reference: '',
-     dropdownNum: 2,
+     dropdownNum: 0,
      radioNum: 2,
      checkboxNum: 2,
      matrixQuestions: 2,
      matrixChoices: 5,
-     setLabel: 50,
-     dropdownItems: {
-      domains: [{
-       key:1,
-       value:''
-      }]
-    }
+     setLength: 50,
+    //  dropdownItems: {
+    //   domains: [{
+    //    key:1,
+    //    value:''
+    //   }]
+    // }
    },
   }
  },
@@ -259,7 +259,7 @@ export default {
  },
  methods: {
   handleChange() {
-    console.log('handling change');
+    console.log('Doing the thing');
   },
   removeDomain(item) {
     var index = this.options.dropdownItems.domains.indexOf(item);

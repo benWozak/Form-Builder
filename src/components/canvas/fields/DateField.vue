@@ -1,7 +1,7 @@
 <template>
     <div id="datepciker">
         <el-collapse>
-            <span class="inputLabel">{{ options.setLabel }}</span><br>
+            <span class="inputLabel">{{ options.title }}</span><br>
             <el-collapse-item name="1">
                 <template slot="title">
                     <el-date-picker v-if="value === 0" 
@@ -25,7 +25,7 @@
                 <div>
                     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
                         <el-form-item label="Field Label">
-                            <el-input v-model="options.setLabel"></el-input>
+                            <el-input v-model="options.title"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
@@ -48,18 +48,18 @@ export default {
         return {
             dateLabel: '',
             dateSelection: '',
-            options: {
-                setLabel: 'Date Function',
-                required: false,
-                reference: '',
-                setLength: 50,
-                dropdownItems: {
-                domains: [{
-                        key:1,
-                        value:''
-                    }]
-                }
-            },
+            // options: {
+            //     title: 'Date Function',
+            //     required: false,
+            //     reference: '',
+            //     setLength: 50,
+            //     dropdownItems: {
+            //     domains: [{
+            //             key:1,
+            //             value:''
+            //         }]
+            //     }
+            // },
             dateType: [
                 {value: 0, label: 'No Restrictions', rules: 'none'},
                 {value: 1, label: 'Select Past only', rules: 'pastOptions'},
@@ -88,7 +88,39 @@ export default {
                 ],
             }
         }
-    }
+    },
+    props: {
+        options: {
+            type: Array | Object,
+            default: {
+                title: 'Text Area',
+                required: false,
+                reference: '',
+                dropdownNum: 2,
+                radioNum: 2,
+                checkboxNum: 2,
+                matrixQuestions: 2,
+                matrixChoices: 5,
+                setLength: 50,
+                dropdownItems: {
+                    domains: [{
+                        key:1,
+                        value:''
+                    }]
+                }
+                // title: 'Text Field',
+                // isRequired: false,
+                // reference: '',
+                // charCount: 50,
+                // dropdownItems: {
+                //         domains: [{
+                //         key:1,
+                //         value:''
+                //     }]
+                // }
+            }
+        }
+    },
 }
 </script>
 

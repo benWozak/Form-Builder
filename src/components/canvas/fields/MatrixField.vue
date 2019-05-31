@@ -1,7 +1,7 @@
 <template>
     <div id="textarea">
         
-            <span class="inputLabel">{{ options.setLabel }}</span><br>
+            <span class="inputLabel">{{ options.title }}</span><br>
             <el-table :data="matrix" stripe>
                 <el-table-column>
                     <el-table-row v-for="(domain, index) in options.dropdownItems.domains" 
@@ -25,7 +25,7 @@
                 <div>
                     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
                         <el-form-item label="Field Label">
-                            <el-input v-model="options.setLabel"></el-input>
+                            <el-input v-model="options.title"></el-input>
                         </el-form-item>
                         <el-form-item>
                             <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
@@ -44,20 +44,54 @@ export default {
             matrix: [
                 {index: '', questionColumn: 'question', answerColumn: 'answer'}
             ],
-            options: {
-                setLabel: 'Matrix',
+            // options: {
+            //     title: 'Matrix',
+            //     required: false,
+            //     reference: '',
+            //     setLength: 50,
+            //     dropdownItems: {
+            //     domains: [{
+            //             key:1,
+            //             value:''
+            //         }]
+            //     }
+            // },
+        }
+    },
+
+    props: {
+        options: {
+            type: Array | Object,
+            default: {
+                title: 'Matrix Field',
                 required: false,
                 reference: '',
+                dropdownNum: 2,
+                radioNum: 2,
+                checkboxNum: 2,
+                matrixQuestions: 2,
+                matrixChoices: 5,
                 setLength: 50,
                 dropdownItems: {
-                domains: [{
+                    domains: [{
                         key:1,
                         value:''
                     }]
                 }
-            },
+                // title: 'Text Field',
+                // isRequired: false,
+                // reference: '',
+                // charCount: 50,
+                // dropdownItems: {
+                //         domains: [{
+                //         key:1,
+                //         value:''
+                //     }]
+                // }
+            }
         }
     },
+    
     methods: {
         removeDomain(item) {
             var index = this.options.dropdownItems.domains.indexOf(item);

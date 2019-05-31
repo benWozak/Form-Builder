@@ -13,8 +13,8 @@
                             <el-input v-model="options.title"></el-input>
                         </el-form-item>
                         <el-form-item label="This field is:" prop="customField">
-                            <el-switch v-model="options.isRequired" active-text="Required" inactive-text="Optional" 
-                                @click="isRequired = !isRequired"></el-switch>
+                            <el-switch v-model="options.required" active-text="Required" inactive-text="Optional" 
+                                @click="required = !required"></el-switch>
                         </el-form-item>
                         <el-form-item label="Field Refers To:">
                             <el-select v-model="options.reference">
@@ -37,8 +37,6 @@
                             <p>What are our references really?</p>
                             </div>
                         </el-form-item>
-                        
-                        
                             <!-- <el-button type="info" icon="el-icon-edit" @click="editItem">EDIT</el-button>
                             <el-button type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                         </el-form>
@@ -62,15 +60,30 @@ export default {
             type: Array | Object,
             default: {
                 title: 'Text Field',
-                isRequired: false,
+                required: false,
                 reference: '',
-                charCount: 50,
+                dropdownNum: 2,
+                radioNum: 2,
+                checkboxNum: 2,
+                matrixQuestions: 2,
+                matrixChoices: 5,
+                setLength: 50,
                 dropdownItems: {
-                        domains: [{
+                    domains: [{
                         key:1,
                         value:''
                     }]
                 }
+                // title: 'Text Field',
+                // isRequired: false,
+                // reference: '',
+                // charCount: 50,
+                // dropdownItems: {
+                //         domains: [{
+                //         key:1,
+                //         value:''
+                //     }]
+                // }
             }
         }
     },
