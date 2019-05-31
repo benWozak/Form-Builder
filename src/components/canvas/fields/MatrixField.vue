@@ -1,26 +1,15 @@
 <template>
     <div id="textarea">
         
-            <span class="inputLabel">{{ options.title }}</span><br>
-            <el-table :data="matrix" stripe>
-                <el-table-column>
-                    <el-table-row v-for="(domain, index) in options.dropdownItems.domains" 
-                        :label="'Question ' + index" :key="domain.key" :prop="'domains.' + index + '.value'"
-                        :rules="{ required: true, message: 'Field can not be null', trigger: 'blur' }">
-
-                        <el-input v-model="domain.value" placeholder="Option Title"></el-input>
-                
-                        <el-button @click.prevent="removeDomain(domain)">Remove</el-button>
-                        <el-button @click="addDomain">New Option</el-button>
-                    </el-table-row>
-                </el-table-column>
-                <el-table-column prop="answerColumn">{{ matrix.answer }}</el-table-column>
-            </el-table>
-            
+        <span class="inputLabel">{{ options.title }}</span><br>
+        <el-table :data="matrix" style="width: 100%; margin-top: 20px" height="250" border :summary-method="getSummaries" show-summary>
+            <el-table-column fixed prop="question" label="question" width="500"></el-table-column>
+            <el-table-column prop="response" label="response"></el-table-column>
+        </el-table> 
         <el-collapse>   
             <el-collapse-item name="1">
                 <template slot="title">
-                    <h1>More Options</h1>
+                    <h1>Options</h1>
                 </template>
                 <div>
                     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
@@ -42,20 +31,19 @@ export default {
     data() {
         return {
             matrix: [
-                {index: '', questionColumn: 'question', answerColumn: 'answer'}
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
+                { question: 'question', response: 'answer'},
             ],
-            // options: {
-            //     title: 'Matrix',
-            //     required: false,
-            //     reference: '',
-            //     setLength: 50,
-            //     dropdownItems: {
-            //     domains: [{
-            //             key:1,
-            //             value:''
-            //         }]
-            //     }
-            // },
         }
     },
 
@@ -72,39 +60,37 @@ export default {
                 matrixQuestions: 2,
                 matrixChoices: 5,
                 setLength: 50,
-                dropdownItems: {
-                    domains: [{
-                        key:1,
-                        value:''
-                    }]
-                }
-                // title: 'Text Field',
-                // isRequired: false,
-                // reference: '',
-                // charCount: 50,
-                // dropdownItems: {
-                //         domains: [{
-                //         key:1,
-                //         value:''
-                //     }]
-                // }
             }
         }
     },
     
     methods: {
-        removeDomain(item) {
-            var index = this.options.dropdownItems.domains.indexOf(item);
-            if (index !== -1) {
-            this.options.dropdownItems.domains.splice(index, 1);
-            }
-        },
-        addDomain() {
-            this.options.dropdownItems.domains.push({
-            key: Date.now(),
-            value: ''
-            });
-        }
+        // placeholder method from ElementUI. replace with relevant code if deciding to keep
+        getSummaries(param) {
+        const { columns, data } = param;
+        const sums = [];
+        columns.forEach((column, index) => {
+          if (index === 0) {
+            sums[index] = 'Total Value';
+            return;
+          }
+          const values = data.map(item => Number(item[column.property]));
+          if (!values.every(value => isNaN(value))) {
+            sums[index] = '$ ' + values.reduce((prev, curr) => {
+              const value = Number(curr);
+              if (!isNaN(value)) {
+                return prev + curr;
+              } else {
+                return prev;
+              }
+            }, 0);
+          } else {
+            sums[index] = 'Total Value';
+          }
+        });
+
+        return sums;
+      }
     }
 }
 </script>
