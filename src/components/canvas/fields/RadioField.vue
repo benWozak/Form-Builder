@@ -25,6 +25,7 @@
                                 {{ item.value }}
                             </span>
                             <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
+                            <el-button type="text" @click="removeItem(item)">Remove</el-button>
                         </li>
                     </ul>
                 <form @submit.prevent="addItem">
@@ -34,6 +35,7 @@
                     <el-input v-model="itemText"></el-input>
                     <el-button type="success" @click="addItem">Add</el-button>
                 </form>
+                <slot></slot>
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -82,6 +84,12 @@ export default {
             this.radioList.push({
                 id: this.nextItem++, value: 'item ' + this.nextItem + ' '
             })
+        },
+        removeItem(item) {
+            var index = this.radioList.indexOf(item);
+            if (index !== -1) {
+                this.radioList.splice(index, 1);
+            }
         },
         setRadioItems() {
             var i;

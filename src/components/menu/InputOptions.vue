@@ -169,7 +169,7 @@
          <el-input-number v-model="options.matrixChoices"
             controls-position="right" 
             @change="handleChange" 
-            :min="2" :max="10">
+            :min="1" :max="10">
           </el-input-number>
       </el-form-item>
       <el-form-item>

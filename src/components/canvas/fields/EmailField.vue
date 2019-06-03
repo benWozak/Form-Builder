@@ -2,6 +2,7 @@
     <div id="email">
         <span class="inputLabel">{{ options.title }}</span><br>
         <el-input type="email" placeholder="example@email.com" v-model="emailfield"></el-input>
+        <slot></slot>
     </div>
 </template>
 

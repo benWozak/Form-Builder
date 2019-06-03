@@ -25,6 +25,7 @@
                                     {{ item.value }}
                                 </span>
                                 <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
+                                <el-button type="text" @click="removeItem(item)">Remove</el-button>
                             </li>
                         </ul>
                 <form @submit.prevent="addItem">
@@ -80,6 +81,12 @@ export default {
             this.dropdownList.push({
                 id: this.nextItem++, value: 'item ' + this.nextItem
             })
+        },
+        removeItem(item) {
+            var index = this.dropdownList.indexOf(item);
+            if (index !== -1) {
+                this.dropdownList.splice(index, 1);
+            }
         },
         setDropdownItems() {
             var i;

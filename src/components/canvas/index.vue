@@ -3,7 +3,7 @@
         <el-container>
             <el-header><h1>Canvas</h1></el-header>
             <el-main>
-                <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover" >
+                <el-card body-style="padding: 10px;" shadow="hover" >
                     <el-divider content-position="left"><span>Required Content</span></el-divider>
 
                     <el-card body-style="padding: 10px;" shadow="hover">
@@ -31,51 +31,73 @@
                     <el-divider></el-divider>
                 </el-card>
 
-            <el-card body-style="padding: 10px;" shadow="hover">
+            <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
                 <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
                     <draggable class="dropArea" v-model="fieldList">
                         <div v-for="(inputType, index) in fieldList" :key="index">
                             <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
-                                <el-popover placement="top-end" width="250" trigger="hover" content="">
+                                <!-- <el-popover placement="top-end" width="250" trigger="hover" content="">
                                     <el-button type="info" icon="el-icon-edit" @click="editItem(index)">EDIT</el-button>
-                                    <el-button type="warning" icon="el-icon-delete" @click="removeItem(index)">REMOVE</el-button>
+                                    <el-button type="warning" icon="el-icon-delete" @click="removeItem(index)">REMOVE</el-button> -->
                                             
-                                    <el-card slot="reference" class="cursor-move" body-style="padding: 10px;" shadow="hover">
+                                    <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                            <TextField :options="inputType.options"/>
+                                            <TextField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </TextField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
-                                            <TextArea :options="inputType.options"/>
+                                            <TextArea :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </TextArea>
                                             <!-- <el-button v-show="visible" type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                                         </div>
                                         <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
-                                            <NumericField :options="inputType.options"/>
+                                            <NumericField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </NumericField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
-                                            <DropdownField :options="inputType.options"/>
+                                            <DropdownField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </DropdownField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
-                                            <RadioField :options="inputType.options"/>
+                                            <RadioField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </RadioField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
-                                            <CheckboxField :options="inputType.options"/>
+                                            <CheckboxField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </CheckboxField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 6"> <!-- Matrix Field -->
-                                            <DateField :options="inputType.options"/>
+                                            <DateField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </DateField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 7"> <!-- Date Field -->
-                                            <MatrixField :options="inputType.options"/>
+                                            <MatrixField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </MatrixField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 8"> <!-- Email -->
-                                            <EmailField :options="inputType.options"/>
+                                            <EmailField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </EmailField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 9"> <!-- Address -->
-                                            <AddressField :options="inputType.options"/>
+                                            <AddressField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </AddressField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
-                                            <PhoneField :options="inputType.options"/>
+                                            <PhoneField :options="inputType.options">
+                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                            </PhoneField>
                                         </div>
                                         <!-- <div v-if="form.length == 0">
                                             <p>New fields will be placed here</p>
@@ -91,7 +113,7 @@
                                             <el-divider></el-divider>
                                         </div> -->
                                     </el-card>
-                                </el-popover>
+                                <!-- </el-popover> -->
                             </el-col>
                         </el-row>
                     </div>

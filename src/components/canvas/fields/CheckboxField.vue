@@ -25,6 +25,7 @@
                                 {{ item.value }}
                             </span>
                             <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
+                            <el-button type="text" @click="removeItem(item)">Remove</el-button>
                         </li>
                     </ul>
                 <form @submit.prevent="addItem">
@@ -34,6 +35,9 @@
                     <el-input v-model="itemText"></el-input>
                     <el-button type="success" @click="addItem">Add</el-button>
                 </form>
+
+                <slot></slot>
+
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -80,6 +84,12 @@ export default {
             this.checkList.push({
                 id: this.nextItem++, value: 'item ' + this.nextItem + ' '
             })
+        },
+        removeItem(item) {
+            var index = this.checkList.indexOf(item);
+            if (index !== -1) {
+                this.checkList.splice(index, 1);
+            }
         },
         setCheckboxItems() {
             var i;

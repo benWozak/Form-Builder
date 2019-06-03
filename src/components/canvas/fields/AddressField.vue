@@ -2,6 +2,7 @@
     <div id="address">
         <span class="inputLabel">{{ options.title }}</span><br>
         <el-input type="text" placeholder="123 address" v-model="addressfields"></el-input>
+        <slot></slot>
     </div>
 </template>
 

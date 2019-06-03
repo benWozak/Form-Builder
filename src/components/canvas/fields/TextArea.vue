@@ -19,6 +19,7 @@
                         </el-form-item>
                     </el-form>
                 </div>
+                <slot></slot>
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -29,18 +30,7 @@ export default {
     data() {
         return {
             customArea: '',
-            // options: {
-            //     title: 'Text Area',
-            //     required: false,
-            //     reference: '',
-            //     setLength: 50,
-            //     dropdownItems: {
-            //     domains: [{
-            //             key:1,
-            //             value:''
-            //         }]
-            //     }
-            // },
+            setLength: 50,
         }
     },
 
