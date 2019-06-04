@@ -56,7 +56,6 @@
                                             <TextArea :options="inputType.options">
                                                 <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </TextArea>
-                                            <!-- <el-button v-show="visible" type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                                         </div>
                                         <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                             <NumericField :options="inputType.options">
@@ -252,7 +251,9 @@ export default {
 
 <style scoped>
 @tailwind base;
+
 @tailwind components;
+
 @tailwind utilities;
 
 #canvas {

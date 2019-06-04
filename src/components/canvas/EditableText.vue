@@ -41,7 +41,7 @@
 	}
 </script>
 <style scoped>
-	input {
+	/* input {
 		@apply bg-transparent border-b outline-none;
-	}
+	} */
 </style>
