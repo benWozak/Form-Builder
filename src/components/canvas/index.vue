@@ -1,7 +1,6 @@
 <template>
     <div id="canvas">
         <el-container>
-            <el-header><h1>Canvas</h1></el-header>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
                     <el-divider content-position="left"><span>Required Content</span></el-divider>
@@ -32,7 +31,12 @@
                 </el-card>
 
             <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                <el-divider content-position="left"><span>{{ sectionHeader }}</span></el-divider>
+                <el-divider content-position="left">
+                    <!-- <form @submit.prevent="showField"> -->
+                        <span v-show="!showField('sectionHeader')" @click="focusField('sectionHeader')">{{ sectionHeader }}</span>
+                        <el-input v-model="sectionHeader" v-show="showField('sectionHeader')" @focus="focusField('sectionHeader')" @blur="blurField"></el-input>
+                    <!-- </form> -->
+                </el-divider>
                     <draggable class="dropArea" v-model="fieldList">
                         <div v-for="(inputType, index) in fieldList" :key="index">
                             <el-row type="flex" :gutter="2">
@@ -45,58 +49,58 @@
                                         
                                         <div v-if="inputType.input.id === 0"> <!-- textbox -->
                                             <TextField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </TextField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                             <TextArea :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </TextArea>
                                             <!-- <el-button v-show="visible" type="warning" icon="el-icon-delete" @click="removeItem">REMOVE</el-button> -->
                                         </div>
                                         <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                             <NumericField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </NumericField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
                                             <DropdownField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </DropdownField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
                                             <RadioField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </RadioField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
                                             <CheckboxField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </CheckboxField>
                                         </div>
-                                        <div v-else-if="inputType.input.id === 6"> <!-- Matrix Field -->
+                                        <div v-else-if="inputType.input.id === 6"> <!-- Date Field -->
                                             <DateField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </DateField>
                                         </div>
-                                        <div v-else-if="inputType.input.id === 7"> <!-- Date Field -->
+                                        <div v-else-if="inputType.input.id === 7"> <!-- Matrix Field -->
                                             <MatrixField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </MatrixField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 8"> <!-- Email -->
                                             <EmailField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </EmailField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 9"> <!-- Address -->
                                             <AddressField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </AddressField>
                                         </div>
                                         <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
                                             <PhoneField :options="inputType.options">
-                                                <el-button type="danger" @click="removeItem(index)">Remove</el-button>
+                                                <el-button class="canvas-card float-right" type="danger" @click="removeItem(index)">Remove</el-button>
                                             </PhoneField>
                                         </div>
                                         <!-- <div v-if="form.length == 0">
@@ -221,6 +225,15 @@ export default {
             dangerouslyUseHTMLString: true,
             message: '<span style="font-family: Inter UI, sans-serif"><strong>Probably wont be using this</strong></span>'
             });
+        },
+        focusField(value){
+            this.editField = value;
+        },
+        blurField(){
+            this.editField = '';
+        },
+        showField(value){
+            return (this.sectionHeader[value] == '' || this.editField == value)
         }
     },
     watch: {
@@ -237,24 +250,18 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 #canvas {
   font-family: 'Avenir', Helvetica, Arial, sans-serif; 
-  /* font-family: sans-serif; */
   font-size: 20px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
   color: #2c3e50;
 }
-/* .dropArea {
-    width: 100%;
-    border: 1px solid black;
-} */
 .el-row {
     margin-bottom: 5px;
     margin-left: 5px;
@@ -271,5 +278,8 @@ export default {
   }
   .el-divider span {
       font-size: 18px;
+  }
+  .canvas-card {
+      font-size: 110%;
   }
 </style>

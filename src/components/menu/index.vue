@@ -1,39 +1,39 @@
 <template>
-    <div id="menu">
-        <div class="menu-container">
-            <el-row type="flex" :gutter="4">
-                <el-col :span="4">
-                    <el-collapse v-model="step" accordion>
-                        <el-collapse-item title="1 - Select a Field" name="1">
-                            <h1>Basic Inputs</h1>
-                            <div v-for="input in basicInputs" :key="input.id" @click="selectInput(input)">
-                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover">
-                                    {{ input.name }}
-                                </el-card>
-                            </div>
+  <div id="menu">
+    <div class="menu-container">
+      <el-row type="flex">
+        <el-col>
+          <el-collapse v-model="step" accordion>
+            <el-collapse-item name="1">
+              <template slot="title">
+                  <p class="menu-title">Select a Field</p>
+              </template>
+              <h3>General</h3>
+              <div v-for="input in basicInputs" :key="input.id" @click="selectInput(input)">
+                  <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
+                      {{ input.name }}
+                  </el-card>
+              </div>
 
-                            <h1>Preset Inputs</h1>
-                            <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
-                                <el-card class="cursor-pointer" body-style="padding: 5px;" shadow="hover">
-                                    {{ input.name }}
-                                </el-card>
-                            </div>
-                        </el-collapse-item>
+              <h3>Preset Inputs</h3>
+              <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
+                  <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
+                      {{ input.name }}
+                  </el-card>
+              </div>
+          </el-collapse-item>
 
-                        <el-collapse-item title="2 - Set Field Requirements" name="2">
-                            <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
-                        </el-collapse-item>
-                    </el-collapse>
-
-                        <!-- <div v-for="input in inputList" :key="input.id">
-                            <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">{{ input.name }}</el-card>
-                        </div> -->
-                    <!-- </draggable> -->
-                </el-col>
-            </el-row>
-        </div>
-              
-    </div>
+          <el-collapse-item name="2">
+              <template slot="title">
+                  <p class="menu-title">Set Field Requirements</p>
+              </template>
+              <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
+            </el-collapse-item>
+          </el-collapse>
+        </el-col>
+      </el-row>
+    </div>            
+  </div>
 </template>
 
 <script>
@@ -98,10 +98,7 @@ export default {
 }
 </script>
 
-<style>
-    #menu {
-        font-size: 28px;
-    }
+<style scoped>
     .menu-container .el-row .el-col .el-collapse {
         /* margin-left: 5px;
         padding-left: 5px; */
@@ -113,10 +110,20 @@ export default {
         margin-left: 5px;
         padding-left: 5px;
     }
-    .el-card {
-        margin: 5px;
+    .el-card:hover {
+        border-color: #badcff;
+        font-size: 120%;
     }
     .cursor-pointer {
         cursor: pointer;
+    }
+    .menu-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    .fields {
+      font-size: 13px;
+      font-weight: bold;
     }
 </style>

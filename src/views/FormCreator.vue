@@ -2,21 +2,23 @@
   <div class="formCreate">
     <h1>Form Builder</h1>
       <el-container>
+        
         <el-aside>
+          <div id="logo">
+             <img :src="image" />
+          </div>
           <FormMenu @add="addField"/>
         </el-aside>
   
           <el-container>
-            <el-header style="text-align: right">
-              <el-dropdown>
-                <i class="el-icon-setting" style="margin-right: 15px"></i>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>View</el-dropdown-item>
-                  <el-dropdown-item>Add</el-dropdown-item>
-                  <el-dropdown-item>Delete</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-              <span>Edit</span>
+            <el-header>
+              <el-menu :default-active="$route.path" 
+                class="w-full" background-color="#eef1f6" active-text-color="#409EFF" 
+                mode="horizontal" @select="handleSelect" router>
+                <el-menu-item default-active index="/NewForm" class="font-bold focus:font-extrabold">Form Builder</el-menu-item>
+                <el-menu-item index="/Preview" class="font-bold focus:font-extrabold">Preview Form</el-menu-item>
+                <el-menu-item index="/" class="dock-right font-bold focus:font-extrabold" @click="buildForm">Finish and Build!</el-menu-item>
+              </el-menu>
             </el-header>
     
           <el-main>
@@ -32,6 +34,7 @@
 import draggable from 'vuedraggable';
 import FormCanvas from '@/components/canvas/index.vue'
 import FormMenu from '@/components/menu/index.vue'
+import image from "@/assets/logo.png"
 
 export default {
   name: 'Form',
@@ -42,12 +45,16 @@ export default {
   },
   data: () => {
     return {
-      //canvasInput: {},
+      image: image,
+      activeIndex: '1',
       inputOptions: {},
       fields: []
     }
   },
   methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
     addField(field) {
       // append to fields
       this.fields.push(field);
@@ -60,21 +67,46 @@ export default {
     updateCanvas(data) {
       this.canvasInput = data.input;
       this.inputOptions = data.options;
+    },
+    buildForm() {
+      this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'info'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Build Successful'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: "Keep doing what you're are doing"
+          });          
+        });
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
+
   .el-container {
     height: 100%; 
     flex-shrink: inherit;
     border: 1px solid #eee;
   }
   .el-header {
-    background-color: #B3C0D1;
+    background-color: rgb(238, 241, 246);
     color: #333;
     line-height: 50px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
   .el-aside {
     color: #333;
@@ -85,10 +117,22 @@ export default {
     top: 0;
     min-width: 180px;
     max-width: 320px;
-    max-height: 800px;
+    max-height: 960px;
     padding-right: 5px;
     overflow-y: auto;
     overflow-x: hidden;
+  }
+  .el-menu--horizontal > .el-menu-item.dock-right {
+    float: right;
+    margin: 0 auto;
+  }
+  #logo {
+    height: 60px;
+  }
+  img {
+    height: 50px;
+    margin-top: 5px;
+    margin-left: 15px;
   }
 </style>
 

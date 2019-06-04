@@ -2,14 +2,14 @@
     <div id="textarea">
         
         <span class="inputLabel">{{ options.title }}</span><br>
-        <el-table :data="matrix" style="width: 100%; margin-top: 20px" height="250" border show-summary>
+        <el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="250" border show-summary>
             <el-table-column fixed prop="question" label="question" width="500" @click="focusField('question')" v-show="!showField('question')">
                 <!-- <span @click="focusField('question')" v-show="!showField('question')"  ></span>
                 <el-input v-model="question" v-show="showField('question')" @focus="focusField('question')" @blur="blurField"></el-input> -->
             </el-table-column>
             <el-table-column prop="response" label="response">
                 <el-radio-group v-for="item in radioList" :key="item.key" v-model="radio">
-                    <el-radio></el-radio>
+                    <el-radio :label="radioList.key"></el-radio>
                 </el-radio-group>
             </el-table-column>
         </el-table> 
@@ -27,7 +27,6 @@
                             <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
                         </el-form-item>
                     </el-form>
-
                      <el-form>
                         <el-form-item label="Matrix Questions"></el-form-item>
                     </el-form>
@@ -61,7 +60,6 @@ export default {
             nextItem: 0,
             radio: 1,
             radioList: [{key: 1}],
-            radioCount: [],
             question: '',
             editField: '',
             itemText: '',
@@ -117,7 +115,6 @@ export default {
                 this.radioList.push({
                     key: i
                 })
-                this.radioCount ++;
             }
         },
         focusField(question) {
@@ -134,5 +131,4 @@ export default {
 </script>
 
 <style>
-
 </style>

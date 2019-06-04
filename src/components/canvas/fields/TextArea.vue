@@ -53,16 +53,6 @@ export default {
                         value:''
                     }]
                 }
-                // title: 'Text Field',
-                // isRequired: false,
-                // reference: '',
-                // charCount: 50,
-                // dropdownItems: {
-                //         domains: [{
-                //         key:1,
-                //         value:''
-                //     }]
-                // }
             }
         }
     },

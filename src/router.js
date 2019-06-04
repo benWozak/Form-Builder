@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Forms from './views/Forms.vue'
+// import FormPreview from './views/FormPreview.vue'
 
 Vue.use(Router)
 
@@ -12,6 +13,19 @@ export default new Router({
       path: '/',
       name: 'Forms',
       component: Forms
+    },
+    {
+      path: '/Preview',
+      name: 'Form Preview',
+      component: () => import('./views/FormPreview.vue'),
+      beforeRouteEnter (to, from, next) {
+        const answer = window.confirm('Are you sure you want to leave?')
+        if (answer) {
+          next('/Preview')
+        } else {
+          next(false)
+        }
+      }
     },
     {
       path: '/NewForm',

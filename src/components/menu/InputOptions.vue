@@ -3,7 +3,7 @@
 
    <!--------TextBox---------->
    <div v-if="inputData.id === 0">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -41,7 +41,7 @@
 
    <!--------TextArea---------->
    <div v-if="inputData.id === 1">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -60,7 +60,7 @@
 
   <!---------Numeric--------->
    <div v-if="inputData.id === 2">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -76,7 +76,7 @@
 
    <!--------Dropdown---------->
    <div v-if="inputData.id === 3">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -96,7 +96,7 @@
 
    <!--------Radio---------->
    <div v-if="inputData.id === 4">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -115,7 +115,7 @@
 
    <!--------Checkbox---------->
    <div v-if="inputData.id === 5">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -132,9 +132,9 @@
     </el-form>
    </div>
 
-   <!--------Date Field---------->
+   <!--------Date---------->
    <div v-if="inputData.id === 6">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -150,7 +150,7 @@
   
   <!--------Matrix---------->
   <div v-if="inputData.id === 7">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -180,7 +180,7 @@
 
    <!--------Email---------->
    <div v-if="inputData.id === 8">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -196,7 +196,7 @@
 
    <!--------Address---------->
    <div v-if="inputData.id === 9">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
@@ -212,7 +212,7 @@
 
    <!--------Phone Number---------->
    <div v-if="inputData.id === 10">
-    <h1>{{ inputData.name }} Field Options</h1>
+    <h1>{{ inputData.name }} Options</h1>
      <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
