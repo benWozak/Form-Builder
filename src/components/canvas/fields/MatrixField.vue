@@ -3,8 +3,8 @@
         
         <span class="inputLabel">{{ options.title }}</span><br>
         <el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="250" border show-summary>
-            <el-table-column fixed prop="question" label="question" width="500">
-              <editable-text @input="showField" v-model="question"></editable-text>
+            <el-table-column fixed label="question" width="500" :prop="question" v-slot="{ $index }">
+              <editable-text @input="showField" v-model="matrix[$index].question"></editable-text>
             </el-table-column>
             <el-table-column prop="response" label="response">
                 <el-radio-group v-for="item in radioList" :key="item.key" v-model="radio">
@@ -60,7 +60,7 @@ export default {
             matrix: [],
             nextItem: 0,
             radio: 1,
-            radioList: [{key: 1}],
+            radioList: [{key: 0}],
             question: '',
             editField: '',
             itemText: '',
