@@ -1,14 +1,14 @@
 <template>
-	<div v-on="$listeners.click" @click="edit">
+	<div v-on="$listeners.click" @click="edit" @keyup.enter="save">
 		<div class="pb-px" v-if="!active">{{ value }}</div>
 		<div v-if="active">
-			<input 
+			<el-input 
 				ref="editable_input" 
 				v-model="newValue" 
 				class="text-base p-0" 
-				type="text" 
+				size="small" 
 				@blur="save" 
-				maxlength="50">
+				maxlength="50"></el-input>
 		</div>
 	</div>
 </template>

@@ -19,7 +19,7 @@
                 <el-form>
                     <el-form-item label="Dropdown Items"></el-form-item>
                 </el-form>
-                    <ul>
+                    <!-- <ul>
                         <li v-for="item in radioList" :key="item.id" >
                             <span v-show="!showField('value')" @click="focusField('value')">
                                 {{ item.value }}
@@ -27,7 +27,15 @@
                             <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
                             <el-button type="text" @click="removeItem(item)">Remove</el-button>
                         </li>
-                    </ul>
+                    </ul> -->
+                <h3>Radio List Items</h3>
+                <el-row v-for="item in radioList" :key="item.id">
+                  <el-col :span="5">
+                      <editable-text class="float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
+                      <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                  </el-col>
+                </el-row>
+
                 <form @submit.prevent="addItem">
                     <el-form>
                         <el-form-item label="Add Item to List"></el-form-item>
@@ -42,6 +50,8 @@
 </template>
 
 <script>
+import EditableText from '@/components/canvas/fields/EditableText.vue'
+
 export default {
     data() {
         return {
@@ -53,6 +63,9 @@ export default {
             ],
             nextItem: 0
         }
+    },
+    components: {
+      EditableText
     },
     props: {
         options: {

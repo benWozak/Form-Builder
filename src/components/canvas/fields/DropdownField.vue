@@ -16,18 +16,15 @@
                             <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
                     </el-form-item>
                 </el-form>
-                <el-form>
-                    <el-form-item label="Dropdown Items"></el-form-item>
-                </el-form>
-                        <ul>
-                            <li v-for="item in dropdownList" :key="item.id" >
-                                <span v-show="!showField('value')" @click="focusField('value')">
-                                    {{ item.value }}
-                                </span>
-                                <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
-                                <el-button type="text" @click="removeItem(item)">Remove</el-button>
-                            </li>
-                        </ul>
+                
+                <h3>Dropdown Items</h3>
+                <el-row v-for="item in dropdownList" :key="item.id">
+                  <el-col :span="5">
+                      <editable-text class="float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
+                      <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                  </el-col>
+                </el-row>
+                        
                 <form @submit.prevent="addItem">
                     <el-form>
                         <el-form-item label="Add Item to List"></el-form-item>
@@ -35,12 +32,16 @@
                     <el-input v-model="itemText"></el-input>
                     <el-button type="success" @click="addItem">Add</el-button>
                 </form>
+                
+                <slot></slot>
             </el-collapse-item>
         </el-collapse>
     </div>
 </template>
 
 <script>
+import EditableText from '@/components/canvas/fields/EditableText.vue'
+
 export default {
     data() {
         return {
@@ -50,6 +51,9 @@ export default {
             dropdownList: [],
             nextItem: 0
         }
+    },
+    components: {
+        EditableText
     },
     props: {
         options: {
@@ -94,12 +98,12 @@ export default {
                 this.loadItem();
             }
         },
-        focusField(value){
-            this.editField = value;
-        },
-        blurField(){
-            this.editField = '';
-        },
+        // focusField(value){
+        //     this.editField = value;
+        // },
+        // blurField(){
+        //     this.editField = '';
+        // },
         showField(value){
             return (this.dropdownList[value] == '' || this.editField == value)
         }
@@ -108,6 +112,13 @@ export default {
 </script>
 
 <style>
+#dropdown {
+  font-family: 'Inter UI', Arial, sans-serif;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
 ul {
   list-style-type: none;
 }

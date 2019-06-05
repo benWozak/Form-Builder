@@ -3,9 +3,8 @@
         
         <span class="inputLabel">{{ options.title }}</span><br>
         <el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="250" border show-summary>
-            <el-table-column fixed prop="question" label="question" width="500" @click="focusField('question')" v-show="!showField('question')">
-                <!-- <span @click="focusField('question')" v-show="!showField('question')"  ></span>
-                <el-input v-model="question" v-show="showField('question')" @focus="focusField('question')" @blur="blurField"></el-input> -->
+            <el-table-column fixed prop="question" label="question" width="500">
+              <editable-text @input="showField" v-model="question"></editable-text>
             </el-table-column>
             <el-table-column prop="response" label="response">
                 <el-radio-group v-for="item in radioList" :key="item.key" v-model="radio">
@@ -30,13 +29,13 @@
                      <el-form>
                         <el-form-item label="Matrix Questions"></el-form-item>
                     </el-form>
-                    <ul>
+                    <!-- <ul>
                         <li v-for="item in matrix" :key="item.id" >
                             <span v-show="!showField('question')" @click="focusField('question')">{{ item.question }}</span>
                             <el-input v-model="item.question" v-show="showField('question')" @focus="focusField('question')" @blur="blurField"></el-input>
                             <el-button type="text" @click="removeItem(item)">Remove</el-button>
                         </li>
-                    </ul>
+                    </ul> -->
 
                     <form @submit.prevent="addItem">
                         <el-form>
@@ -53,6 +52,8 @@
 </template>
 
 <script>
+import EditableText from '@/components/canvas/fields/EditableText.vue'
+
 export default {
     data() {
         return {
@@ -64,6 +65,9 @@ export default {
             editField: '',
             itemText: '',
         }
+    },
+    components: {
+        EditableText
     },
     props: {
         options: {

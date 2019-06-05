@@ -25,7 +25,7 @@
 
           <el-collapse-item name="2">
               <template slot="title">
-                  <p class="menu-title">Set Field Requirements</p>
+                  <p class="menu-title">Field Requirements</p>
               </template>
               <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
             </el-collapse-item>
